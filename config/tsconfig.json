@@ -1,0 +1,18 @@
+{
+  "compilerOptions":{
+    "allowJs": false,
+    "alwaysStrict": true,
+    "jsx": "react",
+    "newLine": "LF",
+    "strict": true,
+    "strictNullChecks": true,
+    "target": "es6",
+    "module": "commonjs",
+    "noImplicitAny": true,
+    "noUnusedParameters": true,
+    "noUnusedLocals": true,
+    "noImplicitThis": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true
+  }
+}
