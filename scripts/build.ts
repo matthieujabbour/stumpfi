@@ -4,23 +4,26 @@
  */
 
 
+/* tslint:disable:no-console */
+
+
 process.env.NODE_ENV = 'production';
 
 
-import * as path from 'path';
 import * as fs from 'fs-extra';
+import * as packageJson from '../package.json';
+import * as path from 'path';
 import * as webpack from 'webpack';
 import config from '../config/webpack.config.prod';
 
 
 const compiler : webpack.Compiler = webpack(config);
 const distPath : string = path.resolve(__dirname, '../dist');
-const packageJson : any = require('../package.json');
 
 
 // `package.json` content used for distribution.
 const distPackageJson : string = JSON.stringify({
-  main: './main.js',
+  main: `./${packageJson.name}.js`,
   name: packageJson.name,
   bugs: packageJson.bugs,
   author: packageJson.author,

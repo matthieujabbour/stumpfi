@@ -4,12 +4,11 @@
  */
 
 
+import * as packageJson from '../package.json';
 import * as path from 'path';
 import * as webpack from 'webpack';
 
 
-// Library name.
-const name : string = 'main';
 // Used to specify to webpack that we only want to consider the files in `src` directory.
 const src : string = path.resolve(__dirname, '../src');
 
@@ -23,15 +22,18 @@ const developmentConfig : webpack.Configuration = {
   node: {
     __dirname: false,
   },
-  entry: { [name]: './main.ts' },
+  entry: { [packageJson.name]: './main.ts' },
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, '../dist'),
     pathinfo: true,
-    library: name,
+    library: packageJson.name,
     libraryTarget: 'commonjs2',
   },
-  externals: {},
+  externals: Object.keys(packageJson.dependencies).reduce(
+    (externals, dependency) => Object.assign(externals, { [dependency]: dependency }),
+    {},
+  ),
   resolve: {
     extensions: ['.json', '.ts', '.tsx', '*'],
   },
@@ -41,12 +43,20 @@ const developmentConfig : webpack.Configuration = {
         test: /\.tsx?$/,
         include: [src],
         use: [
-          // `awesome-typescript-loader` is first used, to compile Typescript into Javascript.
+          // `awesome-typescript-loader` is then used, to compile Typescript into Javascript.
           {
             loader: 'awesome-typescript-loader',
             options: {
               useCache: true,
-              configFileName: path.resolve(__dirname, './tsconfig.json'),
+            },
+          },
+          // `tslint-loader` is first used, to lint the code.
+          {
+            loader: 'tslint-loader',
+            options: {
+              emitErrors: true,
+              failOnHint: true,
+              typeCheck: true,
             },
           },
         ],
