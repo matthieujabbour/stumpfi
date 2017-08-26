@@ -17,6 +17,7 @@ import * as webpack from 'webpack';
 import config from '../config/webpack.config.dev';
 
 
+const types : string = 'types.d.ts';
 const compiler : webpack.Compiler = webpack(config);
 const distPath : string = path.resolve(__dirname, '../dist');
 
@@ -24,6 +25,7 @@ const distPath : string = path.resolve(__dirname, '../dist');
 // `package.json` content used for distribution.
 const distPackageJson : string = JSON.stringify({
   main: `./${packageJson.name}.js`,
+  types: `./${types}`,
   name: packageJson.name,
   bugs: packageJson.bugs,
   author: packageJson.author,
@@ -49,9 +51,10 @@ fs.remove(distPath)
     } else {
       console.log(stats.toString('normal'));
 
-      // Writing distributable `package.json` file into `dist` directory...
+      // Writing distributable `package.json` and `types.d.ts` files into `dist` directory...
       try {
         fs.writeFileSync(path.join(distPath, 'package.json'), distPackageJson);
+        fs.copySync(path.resolve(__dirname, `../src/${types}`), path.join(distPath, types));
       } catch (fsError) {
         console.error(fsError.message);
       }

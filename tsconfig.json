@@ -7,7 +7,7 @@
     "strict": true,
     "strictNullChecks": true,
     "target": "es5",
-    "lib": ["dom", "es6", "scripthost", "dom.iterable"],
+    "lib": ["dom", "es7", "scripthost", "dom.iterable"],
     "module": "commonjs",
     "noImplicitAny": true,
     "noUnusedParameters": true,

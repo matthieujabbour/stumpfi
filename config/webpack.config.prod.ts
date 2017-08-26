@@ -32,10 +32,11 @@ const productionConfig : webpack.Configuration = {
   },
   externals: Object.keys(packageJson.dependencies).reduce(
     (externals, dependency) => Object.assign(externals, { [dependency]: dependency }),
-    {},
+    // This line prevents `react-dom/server` from bein included in bundle - DO NOT REMOVE.
+    { 'react-dom/server': 'react-dom/server' },
   ),
   resolve: {
-    extensions: ['.json', '.ts', '.tsx', '*'],
+    extensions: ['.json', '.ts', '.tsx', '*', '.js'],
   },
   module: {
     rules: [
@@ -78,9 +79,7 @@ const productionConfig : webpack.Configuration = {
     new webpack.optimize.UglifyJsPlugin({
       sourceMap: true,
       beautify: false,
-      mangle: {
-        screw_ie8: true,
-      },
+      mangle: false,
       compress: {
         screw_ie8: true,
         warnings: false,
