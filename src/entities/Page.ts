@@ -54,4 +54,17 @@ export default class Page extends Section {
     return `${super.getText()} ${(this.theme !== null) ? this.theme.getText() : ''}`.trim();
   }
 
+
+  /**
+   * Deeply duplicates the page. Returns a new Page instance.
+   * Caveat : page's theme is not duplicated.
+   * @returns {Page} The duplicated page.
+   */
+  public duplicate() : Page {
+    const duplicatedPage : Page = new Page();
+    this.components.forEach((component) => { duplicatedPage.addComponent(component.duplicate()); });
+    if (this.theme !== null) { duplicatedPage.setTheme(this.theme); }
+    return duplicatedPage;
+  }
+
 }

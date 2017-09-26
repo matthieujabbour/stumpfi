@@ -14,7 +14,7 @@ import Entity from './Entity';
 export default class Section extends Entity {
 
   /** Section's components list. */
-  private components : Component[];
+  protected components : Component[];
 
 
   /**

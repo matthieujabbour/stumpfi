@@ -57,4 +57,13 @@ export default class Content extends Entity {
     return he.decode(stripedHtml);
   }
 
+
+  /**
+   * Deeply duplicates the content. Returns a new Content instance.
+   * @returns {Content} The duplicated content.
+   */
+  public duplicate() : Content {
+    return new Content(this.html);
+  }
+
 }

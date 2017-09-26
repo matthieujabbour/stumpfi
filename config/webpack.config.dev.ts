@@ -75,6 +75,7 @@ const developmentConfig : webpack.Configuration = {
     // Makes some environment variables available to the JS code.
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"development"',
+      'process.env.PACKAGE_VERSION': `"${packageJson.version}"`,
     }),
   ],
 };

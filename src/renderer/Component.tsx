@@ -36,6 +36,7 @@ export default class extends React.PureComponent<ComponentProps, {}> {
         data-theme={this.props['data-theme']}
         data-component-id={data.getId()}
         data-content-id={data.getContent().getId()}
+        className={data.getClassName()}
         style={data.getStyle()}
         dangerouslySetInnerHTML={{ __html: data.getContent().getHtml() }}
       />

@@ -5,9 +5,9 @@
 
 
 import * as React from 'react';
-import * as packageJson from '../../package.json';
 import Document from '../entities/Document';
 import Page from './Page';
+import Resource from './Resource';
 
 
 /** Defines the Document's props type. */
@@ -30,45 +30,28 @@ export default class extends React.PureComponent<DocumentProps, {}> {
 
   public render() : JSX.Element {
     const data : Document = this.props.data;
-
-    // Rendering document's custom resources...
-    const customResources : JSX.Element[] = data.getResources().map((resource, index) => {
-      const innerHTML : { __html : string; } | undefined = (resource.content !== undefined)
-        ? { __html: resource.content as string }
-        : undefined;
-      switch (resource.tagName) {
-        case 'style':
-          return <style {...resource.attributes} dangerouslySetInnerHTML={innerHTML} key={index} />;
-        case 'script':
-          return <script {...resource.attributes} dangerouslySetInnerHTML={innerHTML} key={index}/>;
-        default:
-          return <link {...resource.attributes} key={index} />;
-      }
-    });
-
-    // Rendering all the sections' themes...
-    // const themes :
+    // Default iframe style.
+    const defaultStyle : string = 'iframe[data-page-id]{border: none;}';
 
     return (
       <html>
         <head>
           <title>{data.getName()}</title>
           <meta charSet="UTF-8" />
-          <meta name="generator" content={`stumpfi ${packageJson.version}`} />
+          <meta name="generator" content={`stumpfi ${process.env.PACKAGE_VERSION}`} />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
           <meta name="description" content={data.getDescription()} />
           <meta name="keywords" content={data.getTags().join(' ')} />
           <meta name="author" content={data.getAuthors().join(', ')} />
-          {customResources}
+          <style type="text/css" dangerouslySetInnerHTML={{ __html: defaultStyle }} data-default />
+          {data.getResources().map((resource, index) => <Resource data={resource} key={index} />)}
           <noscript>
             Javascript is currently not enabled on your browser, this may cause the document not
             render correctly.
           </noscript>
         </head>
         <body>
-          <main>
-            {data.getPages().map((page, index) => <Page data={page} key={index} />)}
-          </main>
+          {data.getPages().map((page, index) => <Page data={page} key={index} />)}
         </body>
     </html>
     );

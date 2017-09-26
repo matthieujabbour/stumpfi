@@ -48,6 +48,8 @@ fs.remove(distPath)
   compiler.watch({}, (error, stats) => {
     if (error) {
       console.error(error);
+    } else if (stats.hasErrors()) {
+      console.error(stats.toJson().errors);
     } else {
       console.log(stats.toString('normal'));
 

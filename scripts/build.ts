@@ -49,6 +49,7 @@ fs.remove(distPath)
 }))
 // Displaying webpack compilation stats...
 .then((stats) => {
+  if (stats.hasErrors()) throw new Error(stats.toJson().errors);
   console.log(stats.toString('normal'));
 })
 // Writing distributable `package.json` and `types.d.ts` files into `dist` directory...
