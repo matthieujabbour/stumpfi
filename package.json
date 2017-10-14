@@ -1,6 +1,6 @@
 {
   "name": "stumpfi",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "One file format to rule them all.",
   "repository": "https://github.com/matthieujabbour/stumpfi",
   "homepage": "https://github.com/matthieujabbour/stumpfi",
@@ -26,8 +26,6 @@
     "@types/fs-extra": "^4.0.0",
     "@types/he": "^0.5.29",
     "@types/jest": "^21.1.0",
-    "@types/react": "^16.0.4",
-    "@types/react-dom": "^15.5.4",
     "@types/webpack": "^3.0.9",
     "awesome-typescript-loader": "^3.2.3",
     "fs-extra": "^4.0.1",
@@ -35,21 +33,20 @@
     "ts-jest": "^21.0.1",
     "ts-node": "^3.3.0",
     "tslint": "^5.6.0",
-    "tslint-config-stumpfi": "^1.0.6",
+    "tslint-config-stumpfi": "^1.0.7",
     "tslint-loader": "^3.5.3",
+    "typedoc": "^0.9.0",
     "typescript": "^2.4.2",
     "webpack": "^3.5.5"
   },
   "dependencies": {
-    "he": "^1.1.1",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+    "he": "^1.1.1"
   },
   "scripts": {
     "start": "ts-node scripts/start",
     "build": "ts-node scripts/build",
     "test": "ts-node scripts/test --coverage --watch",
-    "doc": "ts-node scripts/doc"
+    "doc": "./node_modules/.bin/typedoc --out ./doc/ src/"
   },
   "engines": {
     "node": ">= 4"

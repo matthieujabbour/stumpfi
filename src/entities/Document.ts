@@ -8,6 +8,32 @@ import Entity from './Entity';
 import Page from './Page';
 
 
+/** Custom resource type definition. */
+type resourceTag = 'style' | 'script' | 'link';
+interface CustomResource {
+  readonly tagName : resourceTag;
+  readonly content? : string;
+  readonly attributes : {
+    readonly async? : boolean;
+    readonly charSet? : string;
+    readonly crossOrigin? : string;
+    readonly defer? : boolean;
+    readonly integrity? : string;
+    readonly nonce? : string;
+    readonly src? : string;
+    readonly type? : string;
+    readonly media? : string;
+    readonly scoped? : boolean;
+    readonly href? : string;
+    readonly hrefLang? : string;
+    readonly rel? : string;
+    readonly sizes? : string;
+    readonly 'data-default'? : boolean;
+    'data-page-id'? : string;
+  };
+}
+
+
 /**
  * Represents a document.
  */
@@ -222,4 +248,5 @@ export default class Document extends Entity {
     text = `${text} ${this.pages.map(page => page.getText()).join('\n\n')}`;
     return text;
   }
+
 }

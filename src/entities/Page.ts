@@ -4,17 +4,49 @@
  */
 
 
-import Section from './Section';
-import Theme from './Theme';
+import Component from './Component';
+import Entity from './Entity';
+
+
+/** Custom resource type definition. */
+type resourceTag = 'style' | 'script' | 'link';
+interface CustomResource {
+  readonly tagName : resourceTag;
+  readonly content? : string;
+  readonly attributes : {
+    readonly async? : boolean;
+    readonly charSet? : string;
+    readonly crossOrigin? : string;
+    readonly defer? : boolean;
+    readonly integrity? : string;
+    readonly nonce? : string;
+    readonly src? : string;
+    readonly type? : string;
+    readonly media? : string;
+    readonly scoped? : boolean;
+    readonly href? : string;
+    readonly hrefLang? : string;
+    readonly rel? : string;
+    readonly sizes? : string;
+    readonly 'data-default'? : boolean;
+    'data-page-id'? : string;
+  };
+}
 
 
 /**
  * Represents a document page.
  */
-export default class Page extends Section {
+export default class Page extends Entity {
 
-  /** Page's theme. */
-  private theme : Theme | null;
+  /** Page master. */
+  private master : Page | null;
+
+  /** Page's resources. */
+  private resources : CustomResource[];
+
+  /** Page's components list. */
+  private components : Component[];
 
 
   /**
@@ -23,47 +55,118 @@ export default class Page extends Section {
    */
   public constructor() {
     super();
-    this.theme = null;
+    this.master = null;
+    this.resources = [];
+    this.components = [];
   }
 
 
   /**
-   * theme setter
-   * @param {Theme} theme New theme to set to the page.
+   * master setter.
+   * @param {Page} master Master to set to the page.
    * @returns {void}
    */
-  public setTheme(theme : Theme) : void {
-    this.theme = theme;
+  public setMaster(master : Page) : void {
+    this.master = master;
   }
 
 
   /**
-   * theme getter
-   * @returns {Theme | null} The page's theme.
+   * master getter.
+   * @returns {Page | null} The page master.
    */
-  public getTheme() : Theme | null {
-    return this.theme;
+  public getMaster() : Page | null {
+    return this.master;
+  }
+
+
+  /**
+   * Adds a new custom resource to the page.
+   * @param {CustomResource} resource Resource to add to the page.
+   * @returns {void}
+   */
+  public addResource(resource : CustomResource) : void {
+    resource.attributes['data-page-id'] = this.getId();
+    if (!this.resources.includes(resource)) this.resources.push(resource);
+  }
+
+
+  /**
+   * Removes a custom resource from the page.
+   * @param {number} index Index of the resource to remove from the page.
+   * @returns {void}
+   */
+  public removeResource(index : number) : void {
+    if (index > -1) this.resources.splice(index, 1);
+  }
+
+
+  /**
+   * resources getter.
+   * @param {boolean} [includeMaster] Whether to include page master's resources (default to true).
+   * @returns {CustomResource[]} The page's resources.
+   */
+  public getResources(includeMaster : boolean = true) : CustomResource[] {
+    return (includeMaster && this.master !== null)
+      ? this.master.getResources().concat(this.resources)
+      : this.resources;
+  }
+
+
+  /**
+   * Adds a new component to the page if it doesn't already exist.
+   * @param {Component} component Component to add to the page.
+   * @returns {void}
+   */
+  public addComponent(component : Component) : void {
+    if (!this.components.includes(component)) this.components.push(component);
+  }
+
+
+  /**
+   * Removes a component from the page.
+   * @param {number} index Index of the component to remove from the page.
+   * @returns {void}
+   */
+  public removeComponent(index : number) : void {
+    if (index > -1) this.components.splice(index, 1);
+  }
+
+
+  /**
+   * components getter.
+   * @param {boolean} [includeMaster] Whether to include page master's components (default to true).
+   * @returns {Component[]} The page's components list.
+   */
+  public getComponents(includeMaster : boolean = true) : Component[] {
+    return (includeMaster && this.master !== null)
+      ? this.master.getComponents().concat(this.components)
+      : this.components;
   }
 
 
   /**
    * Retrieves all the text contained in the page.
+   * @param {boolean} [includeMaster] Whether to include page master's text (default to true).
    * @returns {string} The page's text.
    */
-  public getText() : string {
-    return `${super.getText()} ${(this.theme !== null) ? this.theme.getText() : ''}`.trim();
+  public getText(includeMaster : boolean = true) : string {
+    return (includeMaster && this.master !== null)
+      ? `${this.master.getText()} ${this.components.map(component => component.getText()).join(' ')}`
+      : this.components.map(component => component.getText()).join(' ');
   }
 
 
   /**
    * Deeply duplicates the page. Returns a new Page instance.
-   * Caveat : page's theme is not duplicated.
+   * Caveat : page master is not duplicated.
    * @returns {Page} The duplicated page.
    */
   public duplicate() : Page {
     const duplicatedPage : Page = new Page();
     this.components.forEach((component) => { duplicatedPage.addComponent(component.duplicate()); });
-    if (this.theme !== null) { duplicatedPage.setTheme(this.theme); }
+    this.resources.forEach((r) => { duplicatedPage.addResource(JSON.parse(JSON.stringify(r))); });
+    if (this.master !== null) { duplicatedPage.setMaster(this.master); }
     return duplicatedPage;
   }
 

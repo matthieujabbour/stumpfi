@@ -32,8 +32,7 @@ const productionConfig : webpack.Configuration = {
   },
   externals: Object.keys(packageJson.dependencies).reduce(
     (externals, dependency) => Object.assign(externals, { [dependency]: dependency }),
-    // This line prevents `react-dom/server` from bein included in bundle - DO NOT REMOVE.
-    { 'react-dom/server': 'react-dom/server' },
+    {},
   ),
   resolve: {
     extensions: ['.json', '.ts', '.tsx', '*', '.js'],
@@ -75,7 +74,6 @@ const productionConfig : webpack.Configuration = {
     // Makes some environment variables available to the JS code.
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"',
-      'process.env.PACKAGE_VERSION': `"${packageJson.version}"`,
     }),
     new webpack.optimize.UglifyJsPlugin({
       sourceMap: true,

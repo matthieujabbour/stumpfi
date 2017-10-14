@@ -8,6 +8,12 @@ import Content from './Content';
 import Entity from './Entity';
 
 
+/** CSS properties type definition. */
+interface CssProperties {
+  [x : string] : string;
+}
+
+
 /**
  * Represents a page component.
  */
@@ -110,7 +116,7 @@ export default class Component extends Entity {
   public duplicate() : Component {
     const duplicatedComponent : Component = new Component(this.content);
     duplicatedComponent.setClassName(this.className);
-    duplicatedComponent.setStyle(this.style);
+    duplicatedComponent.setStyle({ ...this.style });
     return duplicatedComponent;
   }
 

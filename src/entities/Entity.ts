@@ -13,7 +13,7 @@ import * as crypto from 'crypto';
 export default abstract class Entity {
 
   /** Entity's id. */
-  private id : string;
+  protected id : string;
 
 
   /**
