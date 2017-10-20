@@ -4,7 +4,10 @@
  */
 
 
-export * from './entities/Component';
-export * from './entities/Content';
-export * from './entities/Document';
-export * from './entities/Page';
+import Component from './entities/Component';
+import Content from './entities/Content';
+import Document from './entities/Document';
+import Page from './entities/Page';
+
+
+export { Component, Content, Document, Page };

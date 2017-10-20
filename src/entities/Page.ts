@@ -38,9 +38,19 @@ export default class Page extends Entity {
   /**
    * master setter.
    * @param {Page} master Master to set to the page.
+   * @throws {Error} Throws an error if setting this page master creates cyclic dependencies.
    * @returns {void}
    */
   public setMaster(master : Page) : void {
+    // We first ensure that the current page instance is not contained in the masters tree
+    // of `master` (which would lead to cyclic dependencies that would blow up page rendering).
+    let currentMaster : Page | null = master;
+    while (currentMaster !== null && currentMaster.getId() !== this.id) {
+      currentMaster = currentMaster.getMaster();
+    }
+    if (currentMaster !== null) {
+      throw new Error('Cyclic dependencies between page masters is not allowed.');
+    }
     this.master = master;
   }
 

@@ -1,3 +1,13 @@
+2.1.1 / 2017-10-20
+==================
+
+# General
+ - Fixed package structure to match with the types declarations
+
+# Bug Fixes
+ - Cyclic dependencies between page masters (A has a master B which has a master A) are now forbidden, and raise an error
+
+
 2.1.0 / 2017-10-16
 ==================
 
