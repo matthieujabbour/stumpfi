@@ -10,29 +10,9 @@ interface CssProperties {
 }
 
 
-/** Custom resource type definition. */
-type resourceTag = 'style' | 'script' | 'link';
-interface CustomResource {
-  readonly tagName : resourceTag;
-  readonly content? : string;
-  readonly attributes : {
-    readonly async? : boolean;
-    readonly charSet? : string;
-    readonly crossOrigin? : string;
-    readonly defer? : boolean;
-    readonly integrity? : string;
-    readonly nonce? : string;
-    readonly src? : string;
-    readonly type? : string;
-    readonly media? : string;
-    readonly scoped? : boolean;
-    readonly href? : string;
-    readonly hrefLang? : string;
-    readonly rel? : string;
-    readonly sizes? : string;
-    readonly 'data-default'? : boolean;
-    'data-page-id'? : string;
-  };
+/** Resource attributes list type declaration. */
+interface Attributes {
+  [key : string] : string | boolean;
 }
 
 
@@ -80,7 +60,7 @@ export class Content extends Entity {
 
   /**
    * html getter.
-   * @returns {string} The content's html code.
+   * @returns {string} The content's HTML code.
    */
   public getHtml() : string;
 
@@ -195,6 +175,76 @@ export class Component extends Entity {
 
 
 /**
+ * Represents an external resource.
+ */
+export class Resource extends Entity {
+
+  /** Resource HTML type (script, style, link). */
+  private type : string;
+
+  /** Resource content. */
+  private content : string | null;
+
+  /** Resource HTML attributes, depend on its type. */
+  private attributes : Attributes;
+
+
+  /**
+   * Class constructor.
+   * @param {string} type Resource HTML type (script, style, link).
+   * @returns {void}
+   */
+  public constructor(type : string);
+
+
+  /**
+   * type getter.
+   * @returns {string} The resource HTML type.
+   */
+  public getType() : string;
+
+
+  /**
+   * content getter.
+   * @returns {string} The resource content.
+   */
+  public getContent() : string | null;
+
+
+  /**
+   * content setter.
+   * @param {string} content New content to set to the resource.
+   * @returns {void}.
+   */
+  public setContent(content : string) : void;
+
+
+  /**
+   * attributes getter.
+   * @returns {Attributes} The resource attributes.
+   */
+  public getAttributes() : Attributes;
+
+
+  /**
+   * Sets an HTML attribute to the resource.
+   * @param {string} name Attribute name.
+   * @param {string | boolean} value Attribute value.
+   * @returns {void}.
+   */
+  public setAttribute(name : string, value : string | boolean) : void;
+
+
+  /**
+   * Deeply duplicates the resource. Returns a new Resource instance.
+   * @returns {Resource} The duplicated resource.
+   */
+  public duplicate() : Resource;
+
+}
+
+
+/**
  * Represents a document page.
  */
 export class Page extends Entity {
@@ -203,7 +253,7 @@ export class Page extends Entity {
   private master : Page | null;
 
   /** Page's resources. */
-  private resources : CustomResource[];
+  private resources : Resource[];
 
   /** Page's components list. */
   private components : Component[];
@@ -232,15 +282,15 @@ export class Page extends Entity {
 
 
   /**
-   * Adds a new custom resource to the page.
-   * @param {CustomResource} resource Resource to add to the page.
+   * Adds a new external resource to the page.
+   * @param {Resource} resource Resource to add to the page.
    * @returns {void}
    */
-  public addResource(resource : CustomResource) : void;
+  public addResource(resource : Resource) : void;
 
 
   /**
-   * Removes a custom resource from the page.
+   * Removes an external resource from the page.
    * @param {number} index Index of the resource to remove from the page.
    * @returns {void}
    */
@@ -250,9 +300,9 @@ export class Page extends Entity {
   /**
    * resources getter.
    * @param {boolean} [includeMaster] Whether to include page master's resources (default to true).
-   * @returns {CustomResource[]} The page's resources.
+   * @returns {Resource[]} The page's resources.
    */
-  public getResources(includeMaster? : boolean) : CustomResource[];
+  public getResources(includeMaster? : boolean) : Resource[];
 
 
   /**
@@ -314,8 +364,8 @@ export class Document extends Entity {
   /** Document's authors. */
   private authors : string[];
 
-  /** Document's custom resources. */
-  private resources : CustomResource[];
+  /** Document's external resources. */
+  private resources : Resource[];
 
   /** Document's pages list. */
   private pages : Page[];
@@ -415,26 +465,26 @@ export class Document extends Entity {
 
 
   /**
-   * Adds a new custom resource to the document.
-   * @param {CustomResource} resource Resource to add to the document.
+   * Adds a new external resource to the document.
+   * @param {Resource} resource Resource to add to the document.
    * @returns {void}
    */
-  public addResource(resource : CustomResource) : void;
+  public addResource(resource : Resource) : void;
 
 
   /**
-   * Removes a custom resource from the document.
-   * @param {CustomResource} resource Resource to remove from the document.
+   * Removes an external resource from the document.
+   * @param {Resource} resource Resource to remove from the document.
    * @returns {void}
    */
-  public removeResource(resource : CustomResource) : void;
+  public removeResource(resource : Resource) : void;
 
 
   /**
    * resources getter.
-   * @returns {CustomResource[]} The document's custom resources.
+   * @returns {Resource[]} The document's external resources.
    */
-  public getResources() : CustomResource[];
+  public getResources() : Resource[];
 
 
   /**

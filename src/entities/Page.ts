@@ -6,6 +6,7 @@
 
 import Component from './Component';
 import Entity from './Entity';
+import Resource from './Resource';
 
 
 /**
@@ -16,8 +17,8 @@ export default class Page extends Entity {
   /** Page master. */
   private master : Page | null;
 
-  /** Page's resources. */
-  private resources : CustomResource[];
+  /** Page's external resources. */
+  private resources : Resource[];
 
   /** Page's components list. */
   private components : Component[];
@@ -65,18 +66,17 @@ export default class Page extends Entity {
 
 
   /**
-   * Adds a new custom resource to the page.
+   * Adds a new external resource to the page.
    * @param {CustomResource} resource Resource to add to the page.
    * @returns {void}
    */
-  public addResource(resource : CustomResource) : void {
-    resource.attributes['data-page-id'] = this.getId();
+  public addResource(resource : Resource) : void {
     if (!this.resources.includes(resource)) this.resources.push(resource);
   }
 
 
   /**
-   * Removes a custom resource from the page.
+   * Removes an external resource from the page.
    * @param {number} index Index of the resource to remove from the page.
    * @returns {void}
    */
@@ -90,7 +90,7 @@ export default class Page extends Entity {
    * @param {boolean} [includeMaster] Whether to include page master's resources (default to true).
    * @returns {CustomResource[]} The page's resources.
    */
-  public getResources(includeMaster : boolean = true) : CustomResource[] {
+  public getResources(includeMaster : boolean = true) : Resource[] {
     return (includeMaster && this.master !== null)
       ? this.master.getResources().concat(this.resources)
       : this.resources;
@@ -149,7 +149,9 @@ export default class Page extends Entity {
   public duplicate() : Page {
     const duplicatedPage : Page = new Page();
     this.components.forEach((component) => { duplicatedPage.addComponent(component.duplicate()); });
-    this.resources.forEach((r) => { duplicatedPage.addResource(JSON.parse(JSON.stringify(r))); });
+    this.resources.forEach((resource) => {
+      duplicatedPage.addResource(resource.duplicate());
+    });
     if (this.master !== null) { duplicatedPage.setMaster(this.master); }
     return duplicatedPage;
   }

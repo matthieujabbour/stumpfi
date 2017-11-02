@@ -30,7 +30,7 @@ export default class Content extends Entity {
 
   /**
    * html getter.
-   * @returns {string} The content's html code.
+   * @returns {string} The content's HTML code.
    */
   public getHtml() : string {
     return this.html;

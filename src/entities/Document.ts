@@ -6,6 +6,7 @@
 
 import Entity from './Entity';
 import Page from './Page';
+import Resource from './Resource';
 
 
 /**
@@ -25,8 +26,8 @@ export default class Document extends Entity {
   /** Document's authors. */
   private authors : string[];
 
-  /** Document's custom resources. */
-  private resources : CustomResource[];
+  /** Document's external resources. */
+  private resources : Resource[];
 
   /** Document's pages list. */
   private pages : Page[];
@@ -162,21 +163,21 @@ export default class Document extends Entity {
 
 
   /**
-   * Adds a new custom resource to the document.
+   * Adds a new external resource to the document.
    * @param {CustomResource} resource Resource to add to the document.
    * @returns {void}
    */
-  public addResource(resource : CustomResource) : void {
+  public addResource(resource : Resource) : void {
     if (!this.resources.includes(resource)) this.resources.push(resource);
   }
 
 
   /**
-   * Removes a custom resource from the document.
+   * Removes a external resource from the document.
    * @param {CustomResource} resource Resource to remove from the document.
    * @returns {void}
    */
-  public removeResource(resource : CustomResource) : void {
+  public removeResource(resource : Resource) : void {
     const index : number = this.resources.indexOf(resource);
     if (index > -1) this.resources.splice(index, 1);
   }
@@ -184,9 +185,9 @@ export default class Document extends Entity {
 
   /**
    * resources getter.
-   * @returns {CustomResource[]} The document's custom resources.
+   * @returns {CustomResource[]} The document's external resources.
    */
-  public getResources() : CustomResource[] {
+  public getResources() : Resource[] {
     return this.resources;
   }
 

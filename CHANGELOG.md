@@ -1,3 +1,13 @@
+3.0.0 / 2017-11-02
+==================
+
+# General
+ - Class refactoring : CustomResource type has been replaced by the Resource class inherited from Entity.
+
+# Documentation
+ - Improved some wordings.
+
+
 2.1.1 / 2017-10-20
 ==================
 

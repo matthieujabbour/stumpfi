@@ -8,6 +8,12 @@ import Content from './Content';
 import Entity from './Entity';
 
 
+/** CSS properties type definition. */
+interface CssProperties {
+  [x : string] : string;
+}
+
+
 /**
  * Represents a page component.
  */
