@@ -164,7 +164,7 @@ export default class Document extends Entity {
 
   /**
    * Adds a new external resource to the document.
-   * @param {CustomResource} resource Resource to add to the document.
+   * @param {Resource} resource Resource to add to the document.
    * @returns {void}
    */
   public addResource(resource : Resource) : void {
@@ -174,7 +174,7 @@ export default class Document extends Entity {
 
   /**
    * Removes a external resource from the document.
-   * @param {CustomResource} resource Resource to remove from the document.
+   * @param {Resource} resource Resource to remove from the document.
    * @returns {void}
    */
   public removeResource(resource : Resource) : void {
@@ -185,7 +185,7 @@ export default class Document extends Entity {
 
   /**
    * resources getter.
-   * @returns {CustomResource[]} The document's external resources.
+   * @returns {Resource[]} The document's external resources.
    */
   public getResources() : Resource[] {
     return this.resources;
