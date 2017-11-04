@@ -19,7 +19,7 @@ interface Attributes {
 export default class Resource extends Entity {
 
   /** Resource HTML type (script, style, link). */
-  private type : string;
+  private type : 'script' | 'style' | 'link';
 
   /** Resource content. */
   private content : string | null;
@@ -30,10 +30,10 @@ export default class Resource extends Entity {
 
   /**
    * Class constructor.
-   * @param {string} type Resource HTML type (script, style, link).
+   * @param {\'script\' | \'style\' | \'link\'} type Resource HTML type (script, style, link).
    * @returns {void}
    */
-  public constructor(type : string) {
+  public constructor(type : 'script' | 'style' | 'link') {
     super();
     this.type = type;
     this.content = null;
@@ -43,9 +43,9 @@ export default class Resource extends Entity {
 
   /**
    * type getter.
-   * @returns {string} The resource HTML type.
+   * @returns {\'script\' | \'style\' | \'link\'} The resource HTML type.
    */
-  public getType() : string {
+  public getType() : 'script' | 'style' | 'link' {
     return this.type;
   }
 

@@ -67,7 +67,7 @@ export default class Page extends Entity {
 
   /**
    * Adds a new external resource to the page.
-   * @param {CustomResource} resource Resource to add to the page.
+   * @param {Resource} resource Resource to add to the page.
    * @returns {void}
    */
   public addResource(resource : Resource) : void {
@@ -88,7 +88,7 @@ export default class Page extends Entity {
   /**
    * resources getter.
    * @param {boolean} [includeMaster] Whether to include page master's resources (default to true).
-   * @returns {CustomResource[]} The page's resources.
+   * @returns {Resource[]} The page's resources.
    */
   public getResources(includeMaster : boolean = true) : Resource[] {
     return (includeMaster && this.master !== null)
@@ -136,8 +136,8 @@ export default class Page extends Entity {
    */
   public getText(includeMaster : boolean = true) : string {
     return (includeMaster && this.master !== null)
-      ? `${this.master.getText()} ${this.components.map(component => component.getText()).join(' ')}`
-      : this.components.map(component => component.getText()).join(' ');
+      ? `${this.master.getText()} ${this.components.map(component => component.getText()).join(' ')}`.trim()
+      : this.components.map(component => component.getText()).join(' ').trim();
   }
 
 
