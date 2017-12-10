@@ -4,7 +4,7 @@
  */
 
 
-import * as he from 'he';
+import { ContentTypes } from '../types';
 import Entity from './Entity';
 
 
@@ -13,48 +13,70 @@ import Entity from './Entity';
  */
 export default class Content extends Entity {
 
-  /** Content's HTML code. */
-  private html : string;
+  /** Content's type (media, rich text, simple text). */
+  private type : ContentTypes;
+
+  /** Content's markup text. */
+  private markupText : string;
 
 
   /**
    * Class constructor.
-   * @param {string} [html] Content's HTML code.
+   * @param {ContentTypes} type Content's type.
+   * @param {string} [markupText] Content's markup text.
    * @returns {void}
    */
-  public constructor(html : string = '') {
+  public constructor(type : ContentTypes, markupText : string = '') {
     super();
-    this.html = html;
+    this.type = type;
+    this.markupText = markupText;
   }
 
 
   /**
-   * html getter.
-   * @returns {string} The content's HTML code.
+   * type getter.
+   * @returns {ContentTypes} The content's type.
    */
-  public getHtml() : string {
-    return this.html;
+  public getType() : ContentTypes {
+    return this.type;
   }
 
 
   /**
-   * html setter.
-   * @param {string} html HTML code to set to the content.
+   * type setter.
+   * @param {ContentTypes} type Type to set to the content.
    * @returns {void}
    */
-  public setHtml(html : string) : void {
-    this.html = html;
+  public setType(type : ContentTypes) : void {
+    this.type = type;
   }
 
 
   /**
-   * Retrieves all the text contained in the content.
+   * markupText getter.
+   * @returns {string} The content's markup text.
+   */
+  public getMarkupText() : string {
+    return this.markupText;
+  }
+
+
+  /**
+   * markupText setter.
+   * @param {string} markupText Markup text to set to the content.
+   * @returns {void}
+   */
+  public setMarkupText(markupText : string) : void {
+    this.markupText = markupText;
+  }
+
+
+  /**
+   * Retrieves all the raw text contained in the content.
    * @returns {string} The content's text.
    */
   public getText() : string {
-    // We remove all the HTML tags and entities using the excellent `he` module.
-    const stripedHtml : string = this.html.replace(/<[^>]+>/g, '');
-    return he.decode(stripedHtml);
+    return this.markupText;
   }
 
 
@@ -63,7 +85,7 @@ export default class Content extends Entity {
    * @returns {Content} The duplicated content.
    */
   public duplicate() : Content {
-    return new Content(this.html);
+    return new Content(this.type, this.markupText);
   }
 
 }

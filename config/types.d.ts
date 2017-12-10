@@ -4,7 +4,12 @@
  */
 
 
- /** This declaration is necessary to run jest CLI from a file. */
+/** This declaration is necessary to use uglifyjs-webpack-plugin2 module. */
+/** @todo Remove with webpack 4 release. */
+declare module 'uglifyjs-webpack-plugin2';
+
+
+/** This declaration is necessary to run jest CLI from a file. */
  declare module 'jest-cli' {
   export function run(argv: string[]): void;
 }

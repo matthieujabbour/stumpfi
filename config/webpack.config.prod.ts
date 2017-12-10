@@ -4,6 +4,7 @@
  */
 
 
+import * as UglifyJsPlugin from 'uglifyjs-webpack-plugin2';
 import * as packageJson from '../package.json';
 import * as path from 'path';
 import * as webpack from 'webpack';
@@ -19,6 +20,7 @@ const productionConfig : webpack.Configuration = {
   bail: true,
   cache: false,
   context: src,
+  devtool: 'source-map',
   node: {
     __dirname: false,
   },
@@ -75,7 +77,7 @@ const productionConfig : webpack.Configuration = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"',
     }),
-    new webpack.optimize.UglifyJsPlugin({
+    new UglifyJsPlugin({
       sourceMap: true,
       beautify: false,
       mangle: false,
