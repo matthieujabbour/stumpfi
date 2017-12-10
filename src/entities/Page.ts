@@ -5,20 +5,17 @@
 
 
 import Component from './Component';
-import Entity from './Entity';
 import Resource from './Resource';
+import ResourceContainer from './ResourceContainer';
 
 
 /**
  * Represents a document page.
  */
-export default class Page extends Entity {
+export default class Page extends ResourceContainer {
 
   /** Page master. */
   private master : Page | null;
-
-  /** Page's external resources. */
-  private resources : Resource[];
 
   /** Page's components list. */
   private components : Component[];
@@ -31,7 +28,6 @@ export default class Page extends Entity {
   public constructor() {
     super();
     this.master = null;
-    this.resources = [];
     this.components = [];
   }
 
@@ -66,33 +62,13 @@ export default class Page extends Entity {
 
 
   /**
-   * Adds a new external resource to the page.
-   * @param {Resource} resource Resource to add to the page.
-   * @returns {void}
-   */
-  public addResource(resource : Resource) : void {
-    if (!this.resources.includes(resource)) this.resources.push(resource);
-  }
-
-
-  /**
-   * Removes an external resource from the page.
-   * @param {number} index Index of the resource to remove from the page.
-   * @returns {void}
-   */
-  public removeResource(index : number) : void {
-    if (index > -1) this.resources.splice(index, 1);
-  }
-
-
-  /**
    * resources getter.
    * @param {boolean} [includeMaster] Whether to include page master's resources (default to true).
    * @returns {Resource[]} The page's resources.
    */
   public getResources(includeMaster : boolean = true) : Resource[] {
     return (includeMaster && this.master !== null)
-      ? this.master.getResources().concat(this.resources)
+      ? this.master.getResources(includeMaster).concat(this.resources)
       : this.resources;
   }
 
@@ -108,11 +84,12 @@ export default class Page extends Entity {
 
 
   /**
-   * Removes a component from the page.
-   * @param {number} index Index of the component to remove from the page.
+   * Removes a component from the page if exists.
+   * @param {Component} component Component to remove from the page.
    * @returns {void}
    */
-  public removeComponent(index : number) : void {
+  public removeComponent(component : Component) : void {
+    const index : number = this.components.indexOf(component);
     if (index > -1) this.components.splice(index, 1);
   }
 
@@ -124,7 +101,7 @@ export default class Page extends Entity {
    */
   public getComponents(includeMaster : boolean = true) : Component[] {
     return (includeMaster && this.master !== null)
-      ? this.master.getComponents().concat(this.components)
+      ? this.master.getComponents(includeMaster).concat(this.components)
       : this.components;
   }
 
@@ -135,9 +112,10 @@ export default class Page extends Entity {
    * @returns {string} The page's text.
    */
   public getText(includeMaster : boolean = true) : string {
+    const componentsText : string = this.components.map(component => component.getText()).join(' ');
     return (includeMaster && this.master !== null)
-      ? `${this.master.getText()} ${this.components.map(component => component.getText()).join(' ')}`.trim()
-      : this.components.map(component => component.getText()).join(' ').trim();
+      ? `${this.master.getText(includeMaster)} ${componentsText}`.trim()
+      : componentsText.trim();
   }
 
 
@@ -149,9 +127,7 @@ export default class Page extends Entity {
   public duplicate() : Page {
     const duplicatedPage : Page = new Page();
     this.components.forEach((component) => { duplicatedPage.addComponent(component.duplicate()); });
-    this.resources.forEach((resource) => {
-      duplicatedPage.addResource(resource.duplicate());
-    });
+    this.resources.forEach((resource) => { duplicatedPage.addResource(resource.duplicate()); });
     if (this.master !== null) { duplicatedPage.setMaster(this.master); }
     return duplicatedPage;
   }

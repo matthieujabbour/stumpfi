@@ -25,7 +25,6 @@ describe('Entity', () => {
     entity = new EntityChild();
   });
 
-
   describe('constructor', () => {
     test('should always correctly instanciate', () => {
       expect(entity.getId()).toBe('a1bc2de3fg4hi5jk6lm7no8pq9rs0tu1vw2xy3z0');

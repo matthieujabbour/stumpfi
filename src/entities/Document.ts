@@ -4,15 +4,14 @@
  */
 
 
-import Entity from './Entity';
 import Page from './Page';
-import Resource from './Resource';
+import ResourceContainer from './ResourceContainer';
 
 
 /**
  * Represents a document.
  */
-export default class Document extends Entity {
+export default class Document extends ResourceContainer {
 
   /** Document's name. */
   private name : string;
@@ -25,9 +24,6 @@ export default class Document extends Entity {
 
   /** Document's authors. */
   private authors : string[];
-
-  /** Document's external resources. */
-  private resources : Resource[];
 
   /** Document's pages list. */
   private pages : Page[];
@@ -159,36 +155,6 @@ export default class Document extends Entity {
    */
   public getAuthors() : string[] {
     return this.authors;
-  }
-
-
-  /**
-   * Adds a new external resource to the document.
-   * @param {Resource} resource Resource to add to the document.
-   * @returns {void}
-   */
-  public addResource(resource : Resource) : void {
-    if (!this.resources.includes(resource)) this.resources.push(resource);
-  }
-
-
-  /**
-   * Removes a external resource from the document.
-   * @param {Resource} resource Resource to remove from the document.
-   * @returns {void}
-   */
-  public removeResource(resource : Resource) : void {
-    const index : number = this.resources.indexOf(resource);
-    if (index > -1) this.resources.splice(index, 1);
-  }
-
-
-  /**
-   * resources getter.
-   * @returns {Resource[]} The document's external resources.
-   */
-  public getResources() : Resource[] {
-    return this.resources;
   }
 
 

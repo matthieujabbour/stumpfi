@@ -4,15 +4,17 @@
  */
 
 
-interface Attributes {
-  [key : string] : string | boolean;
-}
+/* tslint:disable no-invalid-this */
+
+
+import { Attributes } from '../../types';
+import Entity from './Entity';
 
 
 let instances : number = 0;
 
 
-export default class Resource extends jest.genMockFromModule('../Resource').default {
+export default class Resource extends Entity {
 
   public getType : () => 'script' | 'style' | 'link';
   public getContent : () => string | null;
@@ -20,16 +22,19 @@ export default class Resource extends jest.genMockFromModule('../Resource').defa
   public getAttributes : () => Attributes;
   public setAttribute : (name : string, value : string | boolean) => Attributes;
   public duplicate : () => Resource;
+  private content : string;
 
 
   public constructor() {
     super();
-    const i : number = instances++;
-    this.getType = jest.fn(() => 'script');
-    this.getContent = jest.fn(() => `content${i}`);
-    this.setContent = jest.fn();
-    this.getAttributes = jest.fn(() => ({ 'test-attribute': 'testValue' }));
-    this.setAttribute = jest.fn();
-    this.duplicate = jest.fn(() => new Resource());
+    this.content = `content${instances++}`;
   }
+
 }
+
+Resource.prototype.setContent = jest.fn();
+Resource.prototype.setAttribute = jest.fn();
+Resource.prototype.getType = jest.fn(() => 'script');
+Resource.prototype.duplicate = jest.fn(() => new Resource());
+Resource.prototype.getAttributes = jest.fn(() => ({ 'test-attribute': 'testValue' }));
+Resource.prototype.getContent = jest.fn(function () : string { return `${this.content}`; });

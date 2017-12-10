@@ -9,9 +9,9 @@ import Page from '../Page';
 import Resource from '../Resource';
 
 
-jest.mock('../Entity');
 jest.mock('../Page');
 jest.mock('../Resource');
+jest.mock('../ResourceContainer');
 
 
 describe('Document', () => {
@@ -49,12 +49,14 @@ describe('Document', () => {
   describe('addTag', () => {
     test('should add the tag when not already present in the list', () => {
       document.addTag('tag1');
-      expect(document.getTags()).toMatchObject(['tag1']);
+      document.addTag('tag2');
+      expect(document.getTags()).toMatchObject(['tag1', 'tag2']);
     });
     test('should not add the tag when already present in the list', () => {
       document.addTag('tag1');
+      document.addTag('tag2');
       document.addTag('tag1');
-      expect(document.getTags()).toMatchObject(['tag1']);
+      expect(document.getTags()).toMatchObject(['tag1', 'tag2']);
     });
   });
 
@@ -75,12 +77,14 @@ describe('Document', () => {
   describe('addAuthor', () => {
     test('should add the author when not already present in the list', () => {
       document.addAuthor('author1');
-      expect(document.getAuthors()).toMatchObject(['author1']);
+      document.addAuthor('author2');
+      expect(document.getAuthors()).toMatchObject(['author1', 'author2']);
     });
     test('should not add the author when already present in the list', () => {
       document.addAuthor('author1');
+      document.addAuthor('author2');
       document.addAuthor('author1');
-      expect(document.getAuthors()).toMatchObject(['author1']);
+      expect(document.getAuthors()).toMatchObject(['author1', 'author2']);
     });
   });
 
@@ -88,48 +92,23 @@ describe('Document', () => {
     test('should remove the author when present in the list', () => {
       document.addAuthor('author1');
       document.addAuthor('author2');
-      document.removeAuthor('author1');
-      expect(document.getAuthors()).toMatchObject(['author2']);
+      document.addAuthor('author3');
+      document.removeAuthor('author2');
+      expect(document.getAuthors()).toMatchObject(['author1', 'author3']);
     });
     test('should not remove the author when not present in the list', () => {
       document.addAuthor('author2');
-      document.removeTag('author1');
+      document.removeAuthor('author1');
       expect(document.getAuthors()).toMatchObject(['author2']);
-    });
-  });
-
-  describe('addResource', () => {
-    test('should add the resource when not already present in the list', () => {
-      const resource : Resource = new Resource('script');
-      document.addResource(resource);
-      expect(document.getResources()).toMatchObject([resource]);
-    });
-    test('should not add the resource when already present in the list', () => {
-      const resource : Resource = new Resource('script');
-      document.addResource(resource);
-      document.addResource(resource);
-      expect(document.getResources()).toMatchObject([resource]);
-    });
-  });
-
-  describe('removeResource', () => {
-    test('should remove the resource when present in the list', () => {
-      const resource : Resource = new Resource('script');
-      document.addResource(resource);
-      document.removeResource(resource);
-      expect(document.getResources()).toMatchObject([]);
-    });
-    test('should not remove the resource when not present in the list', () => {
-      const resource : Resource = new Resource('script');
-      document.removeResource(resource);
-      expect(document.getResources()).toMatchObject([]);
     });
   });
 
   test('addPage', () => {
+    // We test if adding the same page twice has the desired effect.
     const page : Page = new Page();
     document.addPage(page);
-    expect(document.getPages()).toMatchObject([page]);
+    document.addPage(page);
+    expect(document.getPages()).toMatchObject([page, page]);
   });
 
   test('getText', () => {

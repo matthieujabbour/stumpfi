@@ -4,13 +4,8 @@
  */
 
 
+import { Attributes } from '../types';
 import Entity from './Entity';
-
-
-/** Resource attributes list type declaration. */
-interface Attributes {
-  [key : string] : string | boolean;
-}
 
 
 /**

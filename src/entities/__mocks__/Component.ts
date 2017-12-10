@@ -4,39 +4,47 @@
  */
 
 
-import Content from '../Content';
+/* tslint:disable no-invalid-this */
 
 
-interface CssProperties {
-  [x : string] : string;
-}
+import { Coordinates, Dimensions } from '../../types';
+import Content from './Content';
+import Entity from './Entity';
+import Template from './Template';
 
 
 let instances : number = 0;
 
 
-export default class Component extends jest.genMockFromModule('../Component').default {
+export default class Component extends Entity {
 
-  public getContent : () => Content;
-  public setContent : (content : Content) => void;
-  public getClassName : () => string;
-  public setClassName : (className : string) => void;
-  public getStyle : () => CssProperties;
-  public setStyle : (style : CssProperties) => void;
+  public getContents : () => Content;
+  public setContentAt : (index : number, content : Content) => void;
+  public getCoordinates : () => Coordinates;
+  public setCoordinates : (coordinates : Coordinates) => void;
+  public getDimensions : () => Dimensions;
+  public setDimensions : (dimensions : Dimensions) => void;
+  public getTemplate : () => Template;
+  public setTemplate : (template : Template) => void;
   public getText : () => string;
   public duplicate : () => Component;
+  private text : string;
 
 
   public constructor() {
     super();
-    const i : number = instances++;
-    this.getContent = jest.fn(() => new Content());
-    this.setContent = jest.fn();
-    this.getClassName = jest.fn(() => `className${i}`);
-    this.setClassName = jest.fn();
-    this.getStyle = jest.fn(() => ({ width: '50px' }));
-    this.setStyle = jest.fn();
-    this.getText = jest.fn(() => `text${i}`);
-    this.duplicate = jest.fn(() => new Component());
+    this.text = `text${instances++}`;
   }
+
 }
+
+Component.prototype.setContentAt = jest.fn();
+Component.prototype.setCoordinates = jest.fn();
+Component.prototype.setDimensions = jest.fn();
+Component.prototype.setTemplate = jest.fn();
+Component.prototype.duplicate = jest.fn(() => new Component());
+Component.prototype.getTemplate = jest.fn(() => new Template());
+Component.prototype.getDimensions = jest.fn(() => ({ w: 20, h: 40 }));
+Component.prototype.getCoordinates = jest.fn(() => ({ x: 20, y: 40 }));
+Component.prototype.getContents = jest.fn(() => [new Content(), new Content()]);
+Component.prototype.getText = jest.fn(function () : string { return this.text; });

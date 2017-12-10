@@ -4,23 +4,32 @@
  */
 
 
+/* tslint:disable no-invalid-this */
+
+
+import Entity from './Entity';
+
+
 let instances : number = 0;
 
 
-export default class Content extends jest.genMockFromModule('../Content').default {
+export default class Content extends Entity {
 
-  public getHtml : () => string;
-  public setHtml : () => void;
+  public getMarkupText : () => string;
+  public setMarkupText : () => void;
   public getText : () => string;
   public duplicate : () => Content;
+  private text : string;
 
 
   public constructor() {
     super();
-    const i : number = instances++;
-    this.getHtml = jest.fn(() => `<p>test${i}</p>`);
-    this.setHtml = jest.fn();
-    this.getText = jest.fn(() => `test${i}`);
-    this.duplicate = jest.fn(() => new Content());
+    this.text = `test${instances++}`;
   }
+
 }
+
+Content.prototype.setMarkupText = jest.fn();
+Content.prototype.duplicate = jest.fn(() => new Content());
+Content.prototype.getText = jest.fn(function () : string { return `${this.text}`; });
+Content.prototype.getMarkupText = jest.fn(function () : string { return `${this.text}`; });

@@ -4,14 +4,10 @@
  */
 
 
+import { ContentTypes, Coordinates, Dimensions } from '../types';
 import Content from './Content';
 import Entity from './Entity';
-
-
-/** CSS properties type definition. */
-interface CssProperties {
-  [x : string] : string;
-}
+import Template from './Template';
 
 
 /**
@@ -19,14 +15,17 @@ interface CssProperties {
  */
 export default class Component extends Entity {
 
-  /** Component's content. */
-  private content : Content;
+  /** Component's contents list. */
+  private contents : Content[];
 
-  /** Component's HTML class name. */
-  private className : string;
+  /** Component's coordinates on the page. */
+  private coordinates : Coordinates;
 
-  /** Component's CSS style. */
-  private style : CssProperties;
+  /** Component's dimensions. */
+  private dimensions : Dimensions;
+
+  /** Component's template. */
+  private template : Template;
 
 
   /**
@@ -34,68 +33,92 @@ export default class Component extends Entity {
    * @param {Content} content Component's content.
    * @returns {void}
    */
-  public constructor(content : Content) {
+  public constructor() {
     super();
-    this.content = content;
-    this.className = '';
-    this.style = {};
+    this.contents = [];
+    this.coordinates = { x: 0, y: 0 };
+    this.dimensions = { w: 0, h: 0 };
+    this.template = new Template('{{RICH_TEXT}}');
   }
 
 
   /**
-   * content getter.
-   * @returns {Content} The component's content.
+   * contents getter.
+   * @returns {Content[]} The component's contents list.
    */
-  public getContent() : Content {
-    return this.content;
+  public getContents() : Content[] {
+    return this.contents;
   }
 
 
   /**
-   * content setter.
-   * @param {Content} content Content to set to the component.
+   * Sets a content at the given index in the component's contents list.
+   * @param {number} index Index of the content in the list.
+   * @param {Content} content Content to set at the given indice in the list.
    * @returns {void}
    */
-  public setContent(content : Content) : void {
-    this.content = content;
+  public setContentAt(index : number, content : Content) : void {
+    for (let i : number = 0; i < index; ++i) {
+      this.contents[i] = this.contents[i] || new Content(ContentTypes.SIMPLE_TEXT);
+    }
+    this.contents[index] = content;
   }
 
 
   /**
-   * className getter.
-   * @returns {string} The component's HTML class name.
+   * coordinates getter.
+   * @returns {Coordinates} The component's coordinates.
    */
-  public getClassName() : string {
-    return this.className;
+  public getCoordinates() : Coordinates {
+    return this.coordinates;
   }
 
 
   /**
-   * className setter.
-   * @param {string} className Class name to set to the component.
+   * coordinates setter.
+   * @param {string} coordinates Coordinates to set to the component.
    * @returns {void}
    */
-  public setClassName(className : string) : void {
-    this.className = className;
+  public setCoordinates(coordinates : Coordinates) : void {
+    this.coordinates = coordinates;
   }
 
 
   /**
-   * style getter.
-   * @returns {CssProperties} The component's style.
+   * dimensions getter.
+   * @returns {Dimensions} The component's dimensions.
    */
-  public getStyle() : CssProperties {
-    return this.style;
+  public getDimensions() : Dimensions {
+    return this.dimensions;
   }
 
 
   /**
-   * style setter.
-   * @param {CssProperties} style CSS style to set to the component.
+   * dimensions setter.
+   * @param {Dimensions} dimensions Dimensions to set to the component.
    * @returns {void}
    */
-  public setStyle(style : CssProperties) : void {
-    this.style = style;
+  public setDimensions(dimensions : Dimensions) : void {
+    this.dimensions = dimensions;
+  }
+
+
+  /**
+   * template getter.
+   * @returns {Template} The component's template.
+   */
+  public getTemplate() : Template {
+    return this.template;
+  }
+
+
+  /**
+   * template setter.
+   * @param {Template} template Template to set to the component.
+   * @returns {void}
+   */
+  public setTemplate(template : Template) : void {
+    this.template = template;
   }
 
 
@@ -104,19 +127,21 @@ export default class Component extends Entity {
    * @returns {string} The component's text.
    */
   public getText() : string {
-    return this.content.getText();
+    return this.contents.map(content => content.getText()).join(' ');
   }
 
 
   /**
    * Deeply duplicates the component. Returns a new Component instance.
-   * Caveat : The component's content is not duplicated.
+   * Caveat : The component's contents and template are not duplicated.
    * @returns {Component} The duplicated component.
    */
   public duplicate() : Component {
-    const duplicatedComponent : Component = new Component(this.content);
-    duplicatedComponent.setClassName(this.className);
-    duplicatedComponent.setStyle({ ...this.style });
+    const duplicatedComponent : Component = new Component();
+    duplicatedComponent.setCoordinates({ ...this.coordinates });
+    duplicatedComponent.setDimensions({ ...this.dimensions });
+    duplicatedComponent.setTemplate(this.template);
+    this.contents.forEach((content, indx) => { duplicatedComponent.setContentAt(indx, content); });
     return duplicatedComponent;
   }
 
