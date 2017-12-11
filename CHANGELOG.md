@@ -1,3 +1,10 @@
+v4.0.1 / 2017-12-11
+===================
+
+# General
+ - Updated package structure and dependencies
+
+
 v4.0.0 / 2017-12-10
 ===================
 

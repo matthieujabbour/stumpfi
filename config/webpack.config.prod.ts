@@ -4,7 +4,6 @@
  */
 
 
-import * as UglifyJsPlugin from 'uglifyjs-webpack-plugin2';
 import * as packageJson from '../package.json';
 import * as path from 'path';
 import * as webpack from 'webpack';
@@ -77,16 +76,18 @@ const productionConfig : webpack.Configuration = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"',
     }),
-    new UglifyJsPlugin({
-      sourceMap: true,
-      beautify: false,
-      mangle: false,
-      compress: {
-        screw_ie8: true,
-        warnings: false,
-      },
-      comments: false,
-    }),
+    // This plugin has been temporarely disabled since `webpack.optimize.UglifyJsPlugin` does
+    // not support ES6+.
+    // new webpack.optimize.UglifyJsPlugin({
+    //   sourceMap: true,
+    //   beautify: false,
+    //   mangle: false,
+    //   compress: {
+    //     screw_ie8: true,
+    //     warnings: false,
+    //   },
+    //   comments: false,
+    // }),
   ],
 };
 
