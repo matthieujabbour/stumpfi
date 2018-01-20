@@ -30,14 +30,17 @@ export default class Component extends Entity {
 
   /**
    * Class constructor.
+   * @param {Template} [template] Template to apply to contents.
+   * @param {Dimensions} [dimensions] Component's dimensions.
+   * @param {Coordinates} [coordinates] Component's coordinates.
    * @returns {void}
    */
-  public constructor() {
+  public constructor(template? : Template, dimensions? : Dimensions, coordinates? : Coordinates) {
     super();
     this.contents = [];
-    this.coordinates = { x: 0, y: 0 };
-    this.dimensions = { w: 0, h: 0 };
-    this.template = new Template('{{RICH_TEXT}}');
+    this.dimensions = dimensions || { w: 0, h: 0 };
+    this.coordinates = coordinates || { x: 0, y: 0 };
+    this.template = template || new Template('{{RICH_TEXT}}');
   }
 
 

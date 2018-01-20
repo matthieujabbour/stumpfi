@@ -16,20 +16,42 @@ jest.mock('../Template');
 
 
 describe('Component', () => {
-  let content : Content;
   let component : Component;
 
   beforeEach(() => {
-    content = new Content(ContentTypes.MEDIA);
     component = new Component();
   });
 
   describe('constructor', () => {
-    test('should always correctly instanciate when passing `content` argument', () => {
+    test('should correctly instanciate when passing no argument', () => {
       expect(component.getContents()).toMatchObject([]);
       expect(component.getTemplate()).toBeInstanceOf(Template);
       expect(component.getDimensions()).toMatchObject({ w: 0, h: 0 });
       expect(component.getCoordinates()).toMatchObject({ x: 0, y: 0 });
+    });
+    test('should correctly instanciate when passing `template` argument', () => {
+      const template : Template = new Template('<p>{{SIMPLE_TEXT}}</p>');
+      component = new Component(template);
+      expect(component.getContents()).toMatchObject([]);
+      expect(component.getTemplate()).toBe(template);
+      expect(component.getDimensions()).toMatchObject({ w: 0, h: 0 });
+      expect(component.getCoordinates()).toMatchObject({ x: 0, y: 0 });
+    });
+    test('should correctly instanciate when passing `dimensions` argument', () => {
+      const dimensions : Dimensions = { w: 45, h: 12 };
+      component = new Component(null, dimensions);
+      expect(component.getContents()).toMatchObject([]);
+      expect(component.getTemplate()).toBeInstanceOf(Template);
+      expect(component.getDimensions()).toBe(dimensions);
+      expect(component.getCoordinates()).toMatchObject({ x: 0, y: 0 });
+    });
+    test('should correctly instanciate when passing `coordinates` argument', () => {
+      const coordinates : Coordinates = { x: 16, y: 6 };
+      component = new Component(null, null, coordinates);
+      expect(component.getContents()).toMatchObject([]);
+      expect(component.getTemplate()).toBeInstanceOf(Template);
+      expect(component.getDimensions()).toMatchObject({ w: 0, h: 0 });
+      expect(component.getCoordinates()).toBe(coordinates);
     });
   });
 
@@ -65,7 +87,7 @@ describe('Component', () => {
     component.setContentAt(1, newContent1);
     component.setContentAt(4, newContent2);
     component.setContentAt(2, newContent1);
-    expect(component.getText()).toBe('test8 test8 test9');
+    expect(component.getText()).toBe('test2 test2 test3');
   });
 
   test('duplicate', () => {

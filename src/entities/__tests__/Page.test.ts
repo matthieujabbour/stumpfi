@@ -27,9 +27,15 @@ describe('Page', () => {
   });
 
   describe('constructor', () => {
-    test('should always correctly instanciate', () => {
+    test('should correctly instanciate when passing no argument', () => {
       page = new Page();
       expect(page.getMaster()).toBe(null);
+      expect(page.getComponents()).toMatchObject([]);
+    });
+    test('should correctly instanciate when passing `master` argument', () => {
+      const master : Page = new Page();
+      page = new Page(master);
+      expect(page.getMaster()).toBe(master);
       expect(page.getComponents()).toMatchObject([]);
     });
   });

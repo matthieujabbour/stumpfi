@@ -23,11 +23,13 @@ export default class Page extends ResourceContainer {
 
   /**
    * Class constructor.
+   * @param {Page} [master] Page master.
    * @returns {void}
    */
-  public constructor() {
+  public constructor(master? : Page) {
     super();
-    this.master = null;
+    // We don't check cyclic dependencies between page masters here since it cannot happen.
+    this.master = master || null;
     this.components = [];
   }
 
