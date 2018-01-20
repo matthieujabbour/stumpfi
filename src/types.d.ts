@@ -271,9 +271,9 @@ export class Template extends ResourceContainer {
  * Represents a page component.
  */
 export class Component extends Entity {
-  
+
   /** Component's contents list. */
-  private contents : Content[];
+  private contents : (Content | null)[];
 
   /** Component's coordinates on the page. */
   private coordinates : Coordinates;
@@ -287,17 +287,19 @@ export class Component extends Entity {
 
   /**
    * Class constructor.
-   * @param {Content} content Component's content.
+   * @param {Template} [template] Template to apply to contents.
+   * @param {Dimensions} [dimensions] Component's dimensions.
+   * @param {Coordinates} [coordinates] Component's coordinates.
    * @returns {void}
    */
-  public constructor();
+  public constructor(template? : Template, dimensions? : Dimensions, coordinates? : Coordinates);
 
 
   /**
    * contents getter.
-   * @returns {Content[]} The component's contents list.
+   * @returns {(Content | null)[]} The component's contents list.
    */
-  public getContents() : Content[];
+  public getContents() : (Content | null)[];
 
 
   /**
@@ -360,7 +362,6 @@ export class Component extends Entity {
    */
   public getText() : string;
 
-
   /**
    * Deeply duplicates the component. Returns a new Component instance.
    * Caveat : The component's contents and template are not duplicated.
@@ -385,9 +386,10 @@ export class Page extends ResourceContainer {
 
   /**
    * Class constructor.
+   * @param {Page} [master] Page master.
    * @returns {void}
    */
-  public constructor();
+  public constructor(master? : Page);
 
 
   /**
