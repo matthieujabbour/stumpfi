@@ -18,7 +18,7 @@ let instances : number = 0;
 
 export default class Component extends Entity {
 
-  public getContents : () => Content;
+  public getContents : () => (Content | null)[];
   public setContentAt : (index : number, content : Content) => void;
   public getCoordinates : () => Coordinates;
   public setCoordinates : (coordinates : Coordinates) => void;
@@ -46,5 +46,5 @@ Component.prototype.duplicate = jest.fn(() => new Component());
 Component.prototype.getTemplate = jest.fn(() => new Template());
 Component.prototype.getDimensions = jest.fn(() => ({ w: 20, h: 40 }));
 Component.prototype.getCoordinates = jest.fn(() => ({ x: 20, y: 40 }));
-Component.prototype.getContents = jest.fn(() => [new Content(), new Content()]);
+Component.prototype.getContents = jest.fn(() => [null, new Content(), null, new Content()]);
 Component.prototype.getText = jest.fn(function () : string { return this.text; });

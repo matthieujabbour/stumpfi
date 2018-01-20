@@ -1,6 +1,6 @@
 {
   "name": "stumpfi",
-  "version": "4.0.1",
+  "version": "5.0.0",
   "description": "One file format to rule them all.",
   "repository": "https://github.com/matthieujabbour/stumpfi",
   "homepage": "https://github.com/matthieujabbour/stumpfi",
@@ -8,7 +8,12 @@
   "keywords": [
     "universal",
     "file",
-    "format"
+    "format",
+    "html",
+    "css",
+    "javascript",
+    "web",
+    "document"
   ],
   "author": "Matthieu JABBOUR <matthieu.jabbour@gmail.com> (https://github.com/matthieujabbour)",
   "contributors": [

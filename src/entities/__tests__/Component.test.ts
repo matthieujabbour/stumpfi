@@ -39,16 +39,8 @@ describe('Component', () => {
     component.setContentAt(1, newContent1);
     component.setContentAt(4, newContent2);
     component.setContentAt(2, newContent1);
-    const contents : Content[] = component.getContents();
-    expect(contents[0]).toBeInstanceOf(Content);
-    expect(contents[0]).not.toBe(newContent1);
-    expect(contents[0]).not.toBe(newContent2);
-    expect(contents[1]).toBe(newContent1);
-    expect(contents[2]).toBe(newContent1);
-    expect(contents[3]).toBeInstanceOf(Content);
-    expect(contents[3]).not.toBe(newContent1);
-    expect(contents[3]).not.toBe(newContent2);
-    expect(contents[4]).toBe(newContent2);
+    const contents : (Content | null)[] = component.getContents();
+    expect(contents).toMatchObject([null, newContent1, newContent1, null, newContent2]);
   });
 
   test('setCoordinates', () => {
@@ -73,7 +65,7 @@ describe('Component', () => {
     component.setContentAt(1, newContent1);
     component.setContentAt(4, newContent2);
     component.setContentAt(2, newContent1);
-    expect(component.getText()).toBe('test13 test11 test11 test15 test12');
+    expect(component.getText()).toBe('test8 test8 test9');
   });
 
   test('duplicate', () => {

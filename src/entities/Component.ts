@@ -4,7 +4,7 @@
  */
 
 
-import { ContentTypes, Coordinates, Dimensions } from '../types';
+import { Coordinates, Dimensions } from '../types';
 import Content from './Content';
 import Entity from './Entity';
 import Template from './Template';
@@ -16,7 +16,7 @@ import Template from './Template';
 export default class Component extends Entity {
 
   /** Component's contents list. */
-  private contents : Content[];
+  private contents : (Content | null)[];
 
   /** Component's coordinates on the page. */
   private coordinates : Coordinates;
@@ -30,7 +30,6 @@ export default class Component extends Entity {
 
   /**
    * Class constructor.
-   * @param {Content} content Component's content.
    * @returns {void}
    */
   public constructor() {
@@ -44,9 +43,9 @@ export default class Component extends Entity {
 
   /**
    * contents getter.
-   * @returns {Content[]} The component's contents list.
+   * @returns {(Content | null)[]} The component's contents list.
    */
-  public getContents() : Content[] {
+  public getContents() : (Content | null)[] {
     return this.contents;
   }
 
@@ -59,7 +58,7 @@ export default class Component extends Entity {
    */
   public setContentAt(index : number, content : Content) : void {
     for (let i : number = 0; i < index; ++i) {
-      this.contents[i] = this.contents[i] || new Content(ContentTypes.SIMPLE_TEXT);
+      this.contents[i] = this.contents[i] || null;
     }
     this.contents[index] = content;
   }
@@ -127,7 +126,8 @@ export default class Component extends Entity {
    * @returns {string} The component's text.
    */
   public getText() : string {
-    return this.contents.map(content => content.getText()).join(' ');
+    const contents : Content[] = this.contents.filter(content => content !== null) as Content[];
+    return contents.map(content => (content as Content).getText()).join(' ');
   }
 
 
@@ -141,7 +141,11 @@ export default class Component extends Entity {
     duplicatedComponent.setCoordinates({ ...this.coordinates });
     duplicatedComponent.setDimensions({ ...this.dimensions });
     duplicatedComponent.setTemplate(this.template);
-    this.contents.forEach((content, indx) => { duplicatedComponent.setContentAt(indx, content); });
+    this.contents.forEach((content, index) => {
+      if (content !== null) {
+        duplicatedComponent.setContentAt(index, content);
+      }
+    });
     return duplicatedComponent;
   }
 
