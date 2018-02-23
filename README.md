@@ -5,15 +5,19 @@ One doc format to rule them all.
 
 ## Usage
 
-`yarn add stumpfi`
+```bash
+yarn add stumpfi
+```
 
 
 ## Development
 
-`yarn run start`
-`yarn run test`
-`yarn run build`
-`yarn run doc`
+```bash
+yarn run start
+yarn run test
+yarn run build
+yarn run doc
+```
 
 
 
