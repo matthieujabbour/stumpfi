@@ -12,7 +12,7 @@ To come.
 This project uses a strict naming convention for issues labelling, this to make information more clear and easily identifiable :
 
 ### Type
- - type: breaking change
+ - ![#fbca04](https://placehold.it/15/fbca04/000000?text=+) type: breaking change
  - type: bug
  - type: discussion
  - type: enhancement
