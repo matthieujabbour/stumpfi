@@ -1,7 +1,7 @@
 # Contribution Guide
 
 Thank you for contributing to the stumpfi project, your help is greatly appreciated !
-In ordrer to keep this open-source project clear and make the contributing process as easy as possible, please read this contribution guide and follow the described guidelines (this is still a work in progress, feel free to suggest improvements so the stumpfi community can work even better together) !
+In ordrer to keep this open-source project clear and make the contribution process as easy as possible, please read this contribution guide and follow the described guidelines (this is still a work in progress, feel free to suggest improvements so the stumpfi community can work even better together) !
 
 
 ## Table of Contents
