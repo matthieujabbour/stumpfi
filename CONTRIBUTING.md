@@ -4,9 +4,31 @@ Thank you for contributing to the stumpfi project, your help is greatly apprecia
 In ordrer to keep this open-source project clear and make the contribution process as easy as possible, please read this contribution guide and follow the described guidelines (this is still a work in progress, feel free to suggest improvements so the stumpfi community can work even better together) !
 
 
+
 ## Table of Contents
 
-To come.
+[Semantic Versioning](#semantic-versioning)
+
+[Branch organization](#branch-organization)
+
+[Contacts](#contacts)
+
+[Labels naming convention](#labels-naming-convention)
+ * [Type](#type)
+ * [Status](#status)
+ * [Difficulty](#difficulty)
+[Reporting bugs](#reporting-bugs)
+
+[Proposing changes](#proposing-changes)
+
+[Pull Requests](#pull-requests)
+ * [Naming convention](#naming-convention)
+ * [Prerequisities](#prerequisities)
+ * [Development workflow and tools](#development-workflow-and-tools)
+ * [Guidelines](#guidelines)
+
+[License](#license)
+
 
 
 ## Semantic Versioning
@@ -14,14 +36,17 @@ To come.
 stumpfi follows [semantic versioning](https://semver.org/). We release patch versions for bugfixes, minor versions for new features, and major versions for any breaking changes.
 
 
+
 ## Branch organization
 
 To come.
 
 
+
 ## Contacts
 
 To come.
+
 
 
 ## Labels naming convention
@@ -51,9 +76,11 @@ In order to improve issues management and to make information clearer and easily
  - ![#c13c5b](https://placehold.it/15/c13c5b/000000?text=+) **[difficulty: challenging](https://github.com/matthieujabbour/stumpfi/labels/difficulty%3A%20challenging)** : issue is very complex, and requires both good skills and a deep knowledge of the project.
 
 
+
 ## Reporting bugs
 
 To come.
+
 
 
 ## Proposing changes
@@ -78,6 +105,7 @@ To come.
 ### Guidelines
 
 To come.
+
 
 
 ## License
