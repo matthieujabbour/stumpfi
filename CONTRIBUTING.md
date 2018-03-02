@@ -17,6 +17,7 @@ In ordrer to keep this open-source project clear and make the contribution proce
  * [Type](#type)
  * [Status](#status)
  * [Difficulty](#difficulty)
+
 [Reporting bugs](#reporting-bugs)
 
 [Proposing changes](#proposing-changes)
@@ -79,28 +80,53 @@ In order to improve issues management and to make information clearer and easily
 
 ## Reporting bugs
 
-To come.
+If you think you found a bug in the code, you can open an issue to report it, so the community can then work to fix it ! Before opening a new issue, make sure the topic is not already being discussed in another issue, to prevent duplicates. Try to be as clear and exhaustive as possible, so people can quickly understand what is going on. You can use the following guideline :
+
+**Issue title** explaining the bug in a small and concise sentence.
+**Version** on which you are experiencing the bug.
+**Test case** to reproduce the bug. You can link a [JSFiddle](https://jsfiddle.net/), [JSBin](https://jsbin.com/), [CodePen](https://codepen.io/#) or any other online programming environment to help !
+**Steps to reproduce** if you don't have any test case link, you can provide a step-by-step process to reproduce the bug.
+**Expected behaviour** describing what should normally happen.
+**Actual behaviour** describing what actually happens.
+**Additional information** like comments, images, GIFs, anything that can help community to correct the issue...
+
+Of course, don't forget to set the correct labels to your issue !
 
 
 
 ## Proposing changes
 
-To come.
+As for bugs, feel free to suggest any interesting improvement or new feature, to make this project live ! Again, before opening this kind of request, make sure it is not already a work in progress by checking first the issues list. You can as well use a similar guideline as the one describe before to make a new request. Just keep in mind that other contributors have to understand your idea to put it into code.
 
 
 ## Pull Requests
 
+Ready to contribute to the code ? That's great, thank you and welcome in the contributors team ! You can now open a new pull request to propose your code to the community.
+
 ### Naming convention
 
-To come.
+When making a new pull request, you should give it a name that allows moderators to quickly and easily have a clear vision of what your request is about and what it contains. To do so, you can name your pull request to the ID of the issue it corrects, e.g. `#164`. This way, everyone can access the whole discussion and get all the details. Furthermore, you can add extra information in the pull request description, that would not be present in the issue's thread. And as usual, don't forget the labels !
 
 ### Prerequisities
 
-To come.
+To technically contribute to this project, here are the software you will need :
+ * A terminal and an IDE ;)
+ * [git](https://git-scm.com/), version 2^
+ * [yarn](https://yarnpkg.com/fr), version 1^
+ * [nodeJS](https://nodejs.org/en), version 6^
+ * [npm](https://www.npmjs.com), version 3^
 
 ### Development workflow and tools
 
-To come.
+```bash
+git clone https://github.com/matthieujabbour/stumpfi.git
+cd stumpfi
+yarn install
+yarn run start
+yarn run test
+yarn run doc
+yarn run build
+```
 
 ### Guidelines
 
