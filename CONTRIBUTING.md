@@ -82,13 +82,13 @@ In order to improve issues management and to make information clearer and easily
 
 If you think you found a bug in the code, you can open an issue to report it, so the community can then work to fix it ! Before opening a new issue, make sure the topic is not already being discussed in another issue, to prevent duplicates. Try to be as clear and exhaustive as possible, so people can quickly understand what is going on. You can use the following guideline :
 
-**Issue title** explaining the bug in a small and concise sentence.
-**Version** on which you are experiencing the bug.
-**Test case** to reproduce the bug. You can link a [JSFiddle](https://jsfiddle.net/), [JSBin](https://jsbin.com/), [CodePen](https://codepen.io/#) or any other online programming environment to help !
-**Steps to reproduce** if you don't have any test case link, you can provide a step-by-step process to reproduce the bug.
-**Expected behaviour** describing what should normally happen.
-**Actual behaviour** describing what actually happens.
-**Additional information** like comments, images, GIFs, anything that can help community to correct the issue...
+ * **Issue title** explaining the bug in a small and concise sentence.
+ * **Version** on which you are experiencing the bug.
+ * **Test case** to reproduce the bug. You can link a [JSFiddle](https://jsfiddle.net/), [JSBin](https://jsbin.com/), [CodePen](https://codepen.io/#) or any other code snippet to help !
+ * **Steps to reproduce** if you don't have any test case link, you can provide a step-by-step process to reproduce the bug.
+ * **Expected behaviour** describing what should normally happen.
+ * **Actual behaviour** describing what actually happens.
+ * **Additional information** like comments, images, GIFs, anything that can help community to correct the issue...
 
 Of course, don't forget to set the correct labels to your issue !
 
