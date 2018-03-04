@@ -25,8 +25,14 @@ In ordrer to keep this open-source project clear and make the contribution proce
 [Pull Requests](#pull-requests)
  * [Naming convention](#naming-convention)
  * [Prerequisities](#prerequisities)
- * [Development workflow and tools](#development-workflow-and-tools)
- * [Guidelines](#guidelines)
+
+[Development workflow and tools](#development-workflow-and-tools)
+
+[Guidelines](#guidelines)
+ * [Typescript](#typescript)
+ * [Git commits](#git-commits)
+
+[Project structure](#project-structure)
 
 [License](#license)
 
@@ -116,7 +122,8 @@ To technically contribute to this project, here are the software you will need :
  * [nodeJS](https://nodejs.org/en), version 6^
  * [npm](https://www.npmjs.com), version 3^
 
-### Development workflow and tools
+
+## Development workflow and tools
 
 ```bash
 git clone https://github.com/matthieujabbour/stumpfi.git
@@ -124,14 +131,25 @@ cd stumpfi
 yarn install
 yarn run start
 yarn run test
-yarn run doc
 yarn run build
+yarn run doc
 ```
 
-### Guidelines
+
+## Guidelines
+
+### Typescript
+
+stumpfi Typescript codebase follows the [AirBnB Javascript Style Guide](https://github.com/airbnb/javascript), adapted to Typescript specificities of course. We implemented a [dedicated TSLINT module](https://github.com/matthieujabbour/tslint-config-stumpfi) to perform linting for that.
+
+### Git commits
+
+To provide good and clear git commit messages, you can follow [this guideline](https://chris.beams.io/posts/git-commit/).
+
+
+## Project structure
 
 To come.
-
 
 
 ## License
