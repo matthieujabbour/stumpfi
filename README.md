@@ -10,17 +10,6 @@ yarn add stumpfi
 ```
 
 
-## Development
-
-```bash
-yarn run start
-yarn run test
-yarn run build
-yarn run doc
-```
-
-
-
 ## Why stumpfi ?
 
 The idea came when I was working in the company I co-founded. I made four main statements, that are especially true for office apps :
@@ -55,10 +44,14 @@ This doc format is not meant to replace every format that exists. For instance, 
 
 
 
+## API documentation
+
+You can find the full documentation [here](https://htmlpreview.github.io/?https://raw.githubusercontent.com/matthieujabbour/stumpfi/master/doc/index.html)
+
+
 ## Contributing
 
-To come.
-
+Want to give a hand ? Please read the [Contribution Guide](https://github.com/matthieujabbour/stumpfi/blob/master/CONTRIBUTING.md) to get started !
 
 
 ## License
