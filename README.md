@@ -9,6 +9,15 @@ One doc format to rule them all.
 yarn add stumpfi
 ```
 
+## Getting started
+
+You can learn the basics of stumpfi reading [this page](https://github.com/matthieujabbour/stumpfi/wiki/%5BWIP%5D-Concepts).
+
+
+## API documentation
+
+You can find the full documentation [here](https://htmlpreview.github.io/?https://raw.githubusercontent.com/matthieujabbour/stumpfi/master/doc/index.html)
+
 
 ## Why stumpfi ?
 
@@ -21,7 +30,6 @@ The idea came when I was working in the company I co-founded. I made four main s
 3. Most of the file formats are whether too simple and thus not extensible for more advanced uses, or super-heavy and unmanageable because they try to handle all the possible usecases using a specific syntax (Microsoft's OOXML format for instance, mixes content and graphic effects into a bloated XML structure defined by a roughly 5000 pages spec document).
 
 4. Directly related to the precedent statement, those file formats are insanely hard to modify programmatically, or even to visualize, and getting started with them is over complicated. Documentation does not always exist, or APIs are way too complex. This is why proprietary libraries or softwares are used for this purpose.
-
 
 
 ## Yet another doc format ?
@@ -37,16 +45,9 @@ Yes and no. Stumpfi is both a file structuration pattern and and API to manipula
 - Extensibility / future proof (since it only uses web technologies)
 
 
-
 ## Caveat
 
 This doc format is not meant to replace every format that exists. For instance, you won't be able to encode an image, a song, or create a 3D model with stumpfi. It is just particularly useful when creating documents that manipulate basic contents such as videos, songs, images, text, ... (e.g. office apps).
-
-
-
-## API documentation
-
-You can find the full documentation [here](https://htmlpreview.github.io/?https://raw.githubusercontent.com/matthieujabbour/stumpfi/master/doc/index.html)
 
 
 ## Contributing
