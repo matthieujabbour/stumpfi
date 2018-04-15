@@ -1,10 +1,10 @@
 {
   "name": "stumpfi",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "description": "One file format to rule them all.",
   "repository": "https://github.com/matthieujabbour/stumpfi",
   "homepage": "https://github.com/matthieujabbour/stumpfi",
-  "main": "./src/main.ts",
+  "main": "./main.ts",
   "keywords": [
     "universal",
     "file",
@@ -26,48 +26,15 @@
   "bugs": {
     "url": "https://github.com/matthieujabbour/stumpfi/issues"
   },
-  "types": "./config/types.d.ts",
+  "types": "./types.d.ts",
   "devDependencies": {
-    "@types/fs-extra": "^4.0.0",
-    "@types/jest": "^21.1.0",
-    "@types/webpack": "^3.0.9",
-    "awesome-typescript-loader": "^3.2.3",
-    "fs-extra": "^4.0.1",
-    "jest": "^21.1.0",
-    "ts-jest": "^21.0.1",
-    "ts-node": "^3.3.0",
-    "tslint": "^5.6.0",
-    "tslint-config-stumpfi": "^1.0.7",
-    "tslint-loader": "^3.5.3",
-    "typedoc": "^0.9.0",
-    "typescript": "^2.4.2",
-    "uglifyjs-webpack-plugin2": "^1.0.3",
-    "webpack": "^3.5.5"
+    "typescript-dev-kit": "^0.0.9"
   },
   "dependencies": {},
   "scripts": {
-    "start": "ts-node scripts/start",
-    "build": "ts-node scripts/build",
-    "test": "ts-node scripts/test --coverage --watch",
-    "doc": "./node_modules/.bin/typedoc --out ./doc/ src/ --exclude \"**/__+(tests|mocks)__/**\""
-  },
-  "engines": {
-    "node": ">= 4"
-  },
-  "jest": {
-    "mapCoverage": true,
-    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
-    "transform": {
-      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
-    },
-    "roots": [
-      "<rootDir>/src"
-    ],
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "json"
-    ]
+    "start": "cd node_modules/typescript-dev-kit/ && node scripts/start",
+    "build": "cd node_modules/typescript-dev-kit/ && node scripts/build",
+    "test": "cd node_modules/typescript-dev-kit/ && node scripts/test",
+    "doc": "node_modules/.bin/typedoc --out ./doc/ src/ --exclude \"**/__+(tests|mocks)__/**\""
   }
 }

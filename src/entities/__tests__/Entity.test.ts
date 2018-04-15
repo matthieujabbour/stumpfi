@@ -4,7 +4,6 @@
  */
 
 
-import * as crypto from 'crypto';
 import Entity from '../Entity';
 
 

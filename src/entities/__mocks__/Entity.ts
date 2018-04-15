@@ -10,18 +10,28 @@
 let instances : number = 0;
 
 
-export default class Entity extends jest.genMockFromModule('../Entity').default {
+interface Entity {
+  getId() : string;
+}
 
-  public getId : () => string;
-  protected id : string;
+
+class Entity {
+  private id : string;
 
 
   public constructor() {
-    super();
     const i : string = `${(instances++)}`;
     this.id = `${'a1bc2de3fg4hi5jk6lm7no8pq9rs0tu1vw2xy3z0'.substring(0, 40 - i.length)}${i}`;
   }
 
+
+  public getId() : string {
+    return this.id;
+  }
 }
 
-Entity.prototype.getId = jest.fn(function () : string { return this.id; });
+
+Entity.prototype.getId = jest.fn(Entity.prototype.getId);
+
+
+export default Entity;

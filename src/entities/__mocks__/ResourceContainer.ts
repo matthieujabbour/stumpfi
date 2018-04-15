@@ -4,30 +4,47 @@
  */
 
 
-/* tslint:disable no-invalid-this */
-
-
-import Entity from './Entity';
 import Resource from './Resource';
 
 
-export default class ResourceContainer extends Entity {
+let instances : number = 0;
 
-  public addResource : (resource : Resource) => void;
-  public removeResource : (resource : Resource) => void;
-  public getResources : () => Resource[];
+
+interface ResourceContainer {
+  getId() : string;
+  getResources() : Resource[];
+  addResource(resource : Resource) : void;
+  removeResource(resource : Resource) : void;
+}
+
+
+class ResourceContainer {
+  protected id : string;
   protected resources : Resource[];
 
 
   public constructor() {
-    super();
+    const i : string = `${(instances++)}`;
+    this.id = `${'a1bc2de3fg4hi5jk6lm7no8pq9rs0tu1vw2xy3z0'.substring(0, 40 - i.length)}${i}`;
     this.resources = [new Resource(), new Resource()];
   }
 
+
+  public getId() : string {
+    return this.id;
+  }
+
+
+  public getResources() : Resource[] {
+    return this.resources;
+  }
 }
 
+
+ResourceContainer.prototype.getId = jest.fn(ResourceContainer.prototype.getId);
+ResourceContainer.prototype.getResources = jest.fn(ResourceContainer.prototype.getResources);
 ResourceContainer.prototype.addResource = jest.fn();
 ResourceContainer.prototype.removeResource = jest.fn();
-ResourceContainer.prototype.getResources = jest.fn(function () : Resource[] {
-  return this.resources;
-});
+
+
+export default ResourceContainer;

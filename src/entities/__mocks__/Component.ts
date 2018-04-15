@@ -4,47 +4,63 @@
  */
 
 
-/* tslint:disable no-invalid-this */
-
-
 import { Coordinates, Dimensions } from '../../types';
 import Content from './Content';
-import Entity from './Entity';
 import Template from './Template';
 
 
 let instances : number = 0;
 
 
-export default class Component extends Entity {
+interface Component {
+  getId() : string;
+  getContents() : (Content | null)[];
+  setContentAt(index : number, content : Content) : void;
+  getCoordinates() : Coordinates;
+  setCoordinates(coordinates : Coordinates) : void;
+  getDimensions() : Dimensions;
+  setDimensions(dimensions : Dimensions) : void;
+  getTemplate() : Template;
+  setTemplate(template : Template) : void;
+  getText() : string;
+  duplicate() : Component;
+}
 
-  public getContents : () => (Content | null)[];
-  public setContentAt : (index : number, content : Content) => void;
-  public getCoordinates : () => Coordinates;
-  public setCoordinates : (coordinates : Coordinates) => void;
-  public getDimensions : () => Dimensions;
-  public setDimensions : (dimensions : Dimensions) => void;
-  public getTemplate : () => Template;
-  public setTemplate : (template : Template) => void;
-  public getText : () => string;
-  public duplicate : () => Component;
+
+class Component {
+  private id : string;
   private text : string;
 
 
   public constructor() {
-    super();
-    this.text = `text${instances++}`;
+    const i : string = `${(instances++)}`;
+    this.id = `${'a1bc2de3fg4hi5jk6lm7no8pq9rs0tu1vw2xy3z0'.substring(0, 40 - i.length)}${i}`;
+    this.text = `text${i}`;
   }
 
+
+  public getId() : string {
+    return this.id;
+  }
+
+
+  public getText() : string {
+    return this.text;
+  }
 }
 
+
+Component.prototype.getId = jest.fn(Component.prototype.getId);
+Component.prototype.getText = jest.fn(Component.prototype.getText);
+Component.prototype.getContents = jest.fn(() => [null, new Content(), null, new Content()]);
 Component.prototype.setContentAt = jest.fn();
+Component.prototype.getCoordinates = jest.fn(() => ({ x: 20, y: 40 }));
 Component.prototype.setCoordinates = jest.fn();
+Component.prototype.getDimensions = jest.fn(() => ({ w: 20, h: 40 }));
 Component.prototype.setDimensions = jest.fn();
+Component.prototype.getTemplate = jest.fn(() => new Template());
 Component.prototype.setTemplate = jest.fn();
 Component.prototype.duplicate = jest.fn(() => new Component());
-Component.prototype.getTemplate = jest.fn(() => new Template());
-Component.prototype.getDimensions = jest.fn(() => ({ w: 20, h: 40 }));
-Component.prototype.getCoordinates = jest.fn(() => ({ x: 20, y: 40 }));
-Component.prototype.getContents = jest.fn(() => [null, new Content(), null, new Content()]);
-Component.prototype.getText = jest.fn(function () : string { return this.text; });
+
+
+export default Component;

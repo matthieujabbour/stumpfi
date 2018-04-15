@@ -6,7 +6,6 @@
 
 import Document from '../Document';
 import Page from '../Page';
-import Resource from '../Resource';
 
 
 jest.mock('../Page');
@@ -115,12 +114,13 @@ describe('Document', () => {
     const page : Page = new Page();
     document.addPage(page);
     document.addPage(page);
+    document.addPage(new Page());
     document.setDescription('test description');
     document.setName('test name');
     document.addTag('tag1');
     document.addTag('tag2');
     document.addAuthor('author1');
     document.addAuthor('author2');
-    expect(document.getText()).toBe('test name test description tag1 tag2 author1 author2 test1\n\ntest1');
+    expect(document.getText()).toBe('test name test description tag1 tag2 author1 author2 text1 master\n\ntext1 master\n\ntext2 master');
   });
 });

@@ -39,7 +39,7 @@ describe('Component', () => {
     });
     test('should correctly instanciate when passing `dimensions` argument', () => {
       const dimensions : Dimensions = { w: 45, h: 12 };
-      component = new Component(null, dimensions);
+      component = new Component(undefined, dimensions);
       expect(component.getContents()).toMatchObject([]);
       expect(component.getTemplate()).toBeInstanceOf(Template);
       expect(component.getDimensions()).toBe(dimensions);
@@ -47,7 +47,7 @@ describe('Component', () => {
     });
     test('should correctly instanciate when passing `coordinates` argument', () => {
       const coordinates : Coordinates = { x: 16, y: 6 };
-      component = new Component(null, null, coordinates);
+      component = new Component(undefined, undefined, coordinates);
       expect(component.getContents()).toMatchObject([]);
       expect(component.getTemplate()).toBeInstanceOf(Template);
       expect(component.getDimensions()).toMatchObject({ w: 0, h: 0 });
@@ -87,7 +87,7 @@ describe('Component', () => {
     component.setContentAt(1, newContent1);
     component.setContentAt(4, newContent2);
     component.setContentAt(2, newContent1);
-    expect(component.getText()).toBe('test2 test2 test3');
+    expect(component.getText()).toBe('text2 text2 text3');
   });
 
   test('duplicate', () => {

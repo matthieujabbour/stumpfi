@@ -4,16 +4,11 @@
  */
 
 
-import { ContentTypes } from '../../types';
 import Component from '../Component';
-import Content from '../Content';
 import Page from '../Page';
-import Resource from '../Resource';
 
 
 jest.mock('../Component');
-jest.mock('../Content');
-jest.mock('../Resource');
 jest.mock('../ResourceContainer');
 
 
@@ -22,8 +17,8 @@ describe('Page', () => {
 
   beforeEach(() => {
     page = new Page();
-    Page.prototype.addResource.mockClear();
-    Component.prototype.duplicate.mockClear();
+    (Page.prototype.addResource as jest.Mock<{}>).mockClear();
+    (Component.prototype.duplicate as jest.Mock<{}>).mockClear();
   });
 
   describe('constructor', () => {
@@ -157,7 +152,6 @@ describe('Page', () => {
   describe('duplicate', () => {
     test('should correctly duplicate when having a page master', () => {
       const component : Component = new Component();
-      const resource : Resource = new Resource('link');
       const master : Page = new Page();
       page.addComponent(component);
       page.setMaster(master);
@@ -170,7 +164,6 @@ describe('Page', () => {
     });
     test('should correctly duplicate when not having a page master', () => {
       const component : Component = new Component();
-      const resource : Resource = new Resource('link');
       page.addComponent(component);
       const duplicatedPage : Page = page.duplicate();
       expect(duplicatedPage.getMaster()).toBe(null);
