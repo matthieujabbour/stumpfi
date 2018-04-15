@@ -1,5 +1,5 @@
 /**
- * Copyright © 2018 - present, Inbenta France.
+ * Copyright 2016 - present, Matthieu Jabbour <matthieu.jabbour@gmail.com>.
  * All rights reserved.
  */
 
@@ -18,5 +18,5 @@ module.exports = {
   },
   srcPath: path.resolve(__dirname, 'src'),
   distPath: path.resolve(__dirname, 'public'),
-  banner: '/**\n * Copyright © 2018 - present, Inbenta France.\n * All rights reserved.\n */',
+  banner: '/**\n * Copyright © 2016 - present, Matthieu Jabbour <matthieu.jabbour@gmail.com>.\n * All rights reserved.\n */',
 };
