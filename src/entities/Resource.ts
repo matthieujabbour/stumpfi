@@ -61,6 +61,7 @@ export default class Resource extends Entity {
    */
   public setContent(content : string) : void {
     this.content = content;
+    this.updateTimestamp();
   }
 
 
@@ -81,6 +82,7 @@ export default class Resource extends Entity {
    */
   public setAttribute(name : string, value : string | boolean) : void {
     this.attributes[name] = value;
+    this.updateTimestamp();
   }
 
 

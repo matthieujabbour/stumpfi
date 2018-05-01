@@ -64,6 +64,7 @@ export default class Component extends Entity {
       this.contents[i] = this.contents[i] || null;
     }
     this.contents[index] = content;
+    this.updateTimestamp();
   }
 
 
@@ -83,6 +84,7 @@ export default class Component extends Entity {
    */
   public setCoordinates(coordinates : Coordinates) : void {
     this.coordinates = coordinates;
+    this.updateTimestamp();
   }
 
 
@@ -102,6 +104,7 @@ export default class Component extends Entity {
    */
   public setDimensions(dimensions : Dimensions) : void {
     this.dimensions = dimensions;
+    this.updateTimestamp();
   }
 
 
@@ -121,6 +124,7 @@ export default class Component extends Entity {
    */
   public setTemplate(template : Template) : void {
     this.template = template;
+    this.updateTimestamp();
   }
 
 

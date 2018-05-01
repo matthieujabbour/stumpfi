@@ -33,7 +33,10 @@ export default abstract class ResourceContainer extends Entity {
    * @returns {void}
    */
   public addResource(resource : Resource) : void {
-    if (!this.resources.includes(resource)) this.resources.push(resource);
+    if (!this.resources.includes(resource)) {
+      this.resources.push(resource);
+      this.updateTimestamp();
+    }
   }
 
 
@@ -44,7 +47,10 @@ export default abstract class ResourceContainer extends Entity {
    */
   public removeResource(resource : Resource) : void {
     const index : number = this.resources.indexOf(resource);
-    if (index > -1) this.resources.splice(index, 1);
+    if (index > -1) {
+      this.resources.splice(index, 1);
+      this.updateTimestamp();
+    }
   }
 
 

@@ -49,6 +49,7 @@ export default class Content extends Entity {
    */
   public setType(type : ContentTypes) : void {
     this.type = type;
+    this.updateTimestamp();
   }
 
 
@@ -68,6 +69,7 @@ export default class Content extends Entity {
    */
   public setMarkupText(markupText : string) : void {
     this.markupText = markupText;
+    this.updateTimestamp();
   }
 
 

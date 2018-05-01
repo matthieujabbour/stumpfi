@@ -40,11 +40,13 @@ describe('Page', () => {
       const master : Page = new Page();
       master.setMaster(page);
       expect(() => page.setMaster(master)).toThrowError();
+      expect(page.getTimestamp()).toBe(0);
     });
     test('should correctly add page master if there is no dependencies cycle', () => {
       const master : Page = new Page();
       page.setMaster(master);
       expect(page.getMaster()).toBe(master);
+      expect(page.getTimestamp()).toBe(1);
     });
   });
 
@@ -68,12 +70,14 @@ describe('Page', () => {
       const component : Component = new Component();
       page.addComponent(component);
       expect(page.getComponents()).toMatchObject([component]);
+      expect(page.getTimestamp()).toBe(1);
     });
     test('should not add the component when already present in the list', () => {
       const component : Component = new Component();
       page.addComponent(component);
       page.addComponent(component);
       expect(page.getComponents()).toMatchObject([component]);
+      expect(page.getTimestamp()).toBe(1);
     });
   });
 
@@ -83,6 +87,7 @@ describe('Page', () => {
       page.addComponent(component);
       page.removeComponent(component);
       expect(page.getComponents()).toMatchObject([]);
+      expect(page.getTimestamp()).toBe(2);
     });
     test('should not remove the component when not present in the list', () => {
       const component : Component = new Component();
@@ -104,6 +109,7 @@ describe('Page', () => {
       master1.setMaster(master2);
       page.setMaster(master1);
       expect(page.getComponents()).toMatchObject([component2, component1, component3]);
+      expect(page.getTimestamp()).toBe(2);
     });
     test('should not retrieve page master components when `includeMaster` is set to `false`', () => {
       const component1 : Component = new Component();

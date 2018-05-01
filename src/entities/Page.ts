@@ -51,6 +51,7 @@ export default class Page extends ResourceContainer {
       throw new Error('Cyclic dependencies between page masters is not allowed.');
     }
     this.master = master;
+    this.updateTimestamp();
   }
 
 
@@ -81,7 +82,10 @@ export default class Page extends ResourceContainer {
    * @returns {void}
    */
   public addComponent(component : Component) : void {
-    if (!this.components.includes(component)) this.components.push(component);
+    if (!this.components.includes(component)) {
+      this.components.push(component);
+      this.updateTimestamp();
+    }
   }
 
 
@@ -92,7 +96,10 @@ export default class Page extends ResourceContainer {
    */
   public removeComponent(component : Component) : void {
     const index : number = this.components.indexOf(component);
-    if (index > -1) this.components.splice(index, 1);
+    if (index > -1) {
+      this.components.splice(index, 1);
+      this.updateTimestamp();
+    }
   }
 
 

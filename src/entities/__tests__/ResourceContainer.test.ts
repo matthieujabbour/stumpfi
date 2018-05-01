@@ -40,6 +40,7 @@ describe('ResourceContainer', () => {
       container.addResource(resourceTwo);
       container.addResource(resourceThree);
       expect(container.getResources()).toMatchObject([resourceOne, resourceTwo, resourceThree]);
+      expect(container.getTimestamp()).toBe(3);
     });
     test('should not add the resource when already present in the list', () => {
       const resourceOne : Resource = new Resource('script');
@@ -50,6 +51,7 @@ describe('ResourceContainer', () => {
       container.addResource(resourceThree);
       container.addResource(resourceThree);
       expect(container.getResources()).toMatchObject([resourceOne, resourceTwo, resourceThree]);
+      expect(container.getTimestamp()).toBe(3);
     });
   });
 
@@ -63,6 +65,7 @@ describe('ResourceContainer', () => {
       container.addResource(resourceThree);
       container.removeResource(resourceTwo);
       expect(container.getResources()).toMatchObject([resourceOne, resourceThree]);
+      expect(container.getTimestamp()).toBe(4);
     });
     test('should not remove the resource when not present in the list', () => {
       const resourceOne : Resource = new Resource('script');
@@ -72,6 +75,7 @@ describe('ResourceContainer', () => {
       container.addResource(resourceThree);
       container.removeResource(resourceTwo);
       expect(container.getResources()).toMatchObject([resourceOne, resourceThree]);
+      expect(container.getTimestamp()).toBe(2);
     });
   });
 });

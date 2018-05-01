@@ -26,5 +26,6 @@ describe('Template', () => {
   test('setCode', () => {
     template.setCode('<a>{SIMPLE_TEXT}</a>');
     expect(template.getCode()).toBe('<a>{SIMPLE_TEXT}</a>');
+    expect(template.getTimestamp()).toBe(1);
   });
 });

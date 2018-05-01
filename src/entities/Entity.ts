@@ -15,6 +15,9 @@ export default abstract class Entity {
   /** Entity's id. */
   protected id : string;
 
+  /** Entity's last modification timestamp. */
+  protected timestamp : number;
+
 
   /**
    * Class constructor.
@@ -22,6 +25,7 @@ export default abstract class Entity {
    */
   public constructor() {
     this.id = crypto.randomBytes(20).toString('hex');
+    this.timestamp = Date.now();
   }
 
 
@@ -45,6 +49,24 @@ export default abstract class Entity {
    */
   public getId() : string {
     return this.id;
+  }
+
+
+  /**
+   * timestamp getter.
+   * @returns {number} The entity's last modification timestamp.
+   */
+  public getTimestamp() : number {
+    return this.timestamp;
+  }
+
+
+  /**
+   * Updates the last modification timestamp.
+   * @returns {void}
+   */
+  protected updateTimestamp() : void {
+    this.timestamp = Date.now();
   }
 
 }

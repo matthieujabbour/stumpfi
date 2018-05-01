@@ -38,6 +38,7 @@ describe('Resource', () => {
         'other-test-attribute': 'OtherTestValue',
       });
       expect(duplicatedResource.getId()).not.toBe(resource.getId());
+      expect(resource.getTimestamp()).toBe(3);
     });
     test('should correctly duplicate with an empty content', () => {
       resource.setAttribute('test-attribute', 'testValue');
@@ -49,6 +50,7 @@ describe('Resource', () => {
         'other-test-attribute': 'OtherTestValue',
       });
       expect(duplicatedResource.getId()).not.toBe(resource.getId());
+      expect(resource.getTimestamp()).toBe(2);
     });
   });
 });

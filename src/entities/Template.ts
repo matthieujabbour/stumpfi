@@ -43,6 +43,7 @@ export default class Template extends ResourceContainer {
    */
   public setCode(code : string) : void {
     this.code = code;
+    this.updateTimestamp();
   }
 
 }

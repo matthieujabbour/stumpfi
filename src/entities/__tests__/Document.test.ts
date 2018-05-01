@@ -38,10 +38,12 @@ describe('Document', () => {
   describe('setName', () => {
     test('should throw an error when the `name` argument is not valid', () => {
       expect(() => document.setName('test?')).toThrowError();
+      expect(document.getTimestamp()).toBe(0);
     });
     test('should correctly set the new name when the `name` argument is valid', () => {
       document.setName('new test name');
       expect(document.getName()).toBe('new test name');
+      expect(document.getTimestamp()).toBe(1);
     });
   });
 
@@ -50,12 +52,14 @@ describe('Document', () => {
       document.addTag('tag1');
       document.addTag('tag2');
       expect(document.getTags()).toMatchObject(['tag1', 'tag2']);
+      expect(document.getTimestamp()).toBe(2);
     });
     test('should not add the tag when already present in the list', () => {
       document.addTag('tag1');
       document.addTag('tag2');
       document.addTag('tag1');
       expect(document.getTags()).toMatchObject(['tag1', 'tag2']);
+      expect(document.getTimestamp()).toBe(2);
     });
   });
 
@@ -65,11 +69,13 @@ describe('Document', () => {
       document.addTag('tag2');
       document.removeTag('tag1');
       expect(document.getTags()).toMatchObject(['tag2']);
+      expect(document.getTimestamp()).toBe(3);
     });
     test('should not remove the tag when not present in the list', () => {
       document.addTag('tag2');
       document.removeTag('tag1');
       expect(document.getTags()).toMatchObject(['tag2']);
+      expect(document.getTimestamp()).toBe(1);
     });
   });
 
@@ -78,12 +84,14 @@ describe('Document', () => {
       document.addAuthor('author1');
       document.addAuthor('author2');
       expect(document.getAuthors()).toMatchObject(['author1', 'author2']);
+      expect(document.getTimestamp()).toBe(2);
     });
     test('should not add the author when already present in the list', () => {
       document.addAuthor('author1');
       document.addAuthor('author2');
       document.addAuthor('author1');
       expect(document.getAuthors()).toMatchObject(['author1', 'author2']);
+      expect(document.getTimestamp()).toBe(2);
     });
   });
 
@@ -94,11 +102,13 @@ describe('Document', () => {
       document.addAuthor('author3');
       document.removeAuthor('author2');
       expect(document.getAuthors()).toMatchObject(['author1', 'author3']);
+      expect(document.getTimestamp()).toBe(4);
     });
     test('should not remove the author when not present in the list', () => {
       document.addAuthor('author2');
       document.removeAuthor('author1');
       expect(document.getAuthors()).toMatchObject(['author2']);
+      expect(document.getTimestamp()).toBe(1);
     });
   });
 
@@ -108,6 +118,7 @@ describe('Document', () => {
     document.addPage(page);
     document.addPage(page);
     expect(document.getPages()).toMatchObject([page, page]);
+    expect(document.getTimestamp()).toBe(2);
   });
 
   test('getText', () => {

@@ -63,22 +63,26 @@ describe('Component', () => {
     component.setContentAt(2, newContent1);
     const contents : (Content | null)[] = component.getContents();
     expect(contents).toMatchObject([null, newContent1, newContent1, null, newContent2]);
+    expect(component.getTimestamp()).toBe(3);
   });
 
   test('setCoordinates', () => {
     component.setCoordinates({ x: 15, y: 25 });
     expect(component.getCoordinates()).toMatchObject({ x: 15, y: 25 });
+    expect(component.getTimestamp()).toBe(1);
   });
 
   test('setDimensions', () => {
     component.setDimensions({ w: 15, h: 25 });
     expect(component.getDimensions()).toMatchObject({ w: 15, h: 25 });
+    expect(component.getTimestamp()).toBe(1);
   });
 
   test('setTemplate', () => {
     const template : Template = new Template('<p>{{MEDIA}}</p>');
     component.setTemplate(template);
     expect(component.getTemplate()).toBe(template);
+    expect(component.getTimestamp()).toBe(1);
   });
 
   test('getText', () => {

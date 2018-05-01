@@ -28,7 +28,7 @@
   },
   "types": "./types.d.ts",
   "devDependencies": {
-    "typescript-dev-kit": "^0.0.13"
+    "typescript-dev-kit": "^0.0.14"
   },
   "dependencies": {},
   "scripts": {

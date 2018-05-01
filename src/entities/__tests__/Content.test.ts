@@ -34,11 +34,13 @@ describe('Content', () => {
   test('setType', () => {
     content.setType(ContentTypes.MEDIA);
     expect(content.getType()).toBe(ContentTypes.MEDIA);
+    expect(content.getTimestamp()).toBe(1);
   });
 
   test('setMarkupText', () => {
     content.setMarkupText('Test 2');
     expect(content.getMarkupText()).toBe('Test 2');
+    expect(content.getTimestamp()).toBe(1);
   });
 
   describe('getText', () => {

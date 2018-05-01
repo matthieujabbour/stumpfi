@@ -67,6 +67,7 @@ export default class Document extends ResourceContainer {
   public setName(name : string) : void {
     Document.checkName(name);
     this.name = name;
+    this.updateTimestamp();
   }
 
 
@@ -86,6 +87,7 @@ export default class Document extends ResourceContainer {
    */
   public setDescription(description : string) : void {
     this.description = description;
+    this.updateTimestamp();
   }
 
 
@@ -104,7 +106,10 @@ export default class Document extends ResourceContainer {
    * @returns {void}
    */
   public addTag(tag : string) : void {
-    if (!this.tags.includes(tag)) this.tags.push(tag);
+    if (!this.tags.includes(tag)) {
+      this.tags.push(tag);
+      this.updateTimestamp();
+    }
   }
 
 
@@ -115,7 +120,10 @@ export default class Document extends ResourceContainer {
    */
   public removeTag(tag : string) : void {
     const index : number = this.tags.indexOf(tag);
-    if (index > -1) this.tags.splice(index, 1);
+    if (index > -1) {
+      this.tags.splice(index, 1);
+      this.updateTimestamp();
+    }
   }
 
 
@@ -134,7 +142,10 @@ export default class Document extends ResourceContainer {
    * @returns {void}
    */
   public addAuthor(author : string) : void {
-    if (!this.authors.includes(author)) this.authors.push(author);
+    if (!this.authors.includes(author)) {
+      this.authors.push(author);
+      this.updateTimestamp();
+    }
   }
 
 
@@ -145,7 +156,10 @@ export default class Document extends ResourceContainer {
    */
   public removeAuthor(author : string) : void {
     const index : number = this.authors.indexOf(author);
-    if (index > -1) this.authors.splice(index, 1);
+    if (index > -1) {
+      this.authors.splice(index, 1);
+      this.updateTimestamp();
+    }
   }
 
 
@@ -174,6 +188,7 @@ export default class Document extends ResourceContainer {
    */
   public addPage(page : Page) : void {
     this.pages.push(page);
+    this.updateTimestamp();
   }
 
 

@@ -21,10 +21,12 @@ interface ResourceContainer {
 class ResourceContainer {
   protected id : string;
   protected resources : Resource[];
+  private timestamp : number;
 
 
   public constructor() {
     const i : string = `${(instances++)}`;
+    this.timestamp = 0;
     this.id = `${'a1bc2de3fg4hi5jk6lm7no8pq9rs0tu1vw2xy3z0'.substring(0, 40 - i.length)}${i}`;
     this.resources = [new Resource(), new Resource()];
   }
@@ -38,10 +40,21 @@ class ResourceContainer {
   public getResources() : Resource[] {
     return this.resources;
   }
+
+
+  public getTimestamp() : number {
+    return this.timestamp;
+  }
+
+
+  protected updateTimestamp() : void {
+    this.timestamp += 1;
+  }
 }
 
 
 ResourceContainer.prototype.getId = jest.fn(ResourceContainer.prototype.getId);
+ResourceContainer.prototype.getTimestamp = jest.fn(ResourceContainer.prototype.getTimestamp);
 ResourceContainer.prototype.getResources = jest.fn(ResourceContainer.prototype.getResources);
 ResourceContainer.prototype.addResource = jest.fn();
 ResourceContainer.prototype.removeResource = jest.fn();
