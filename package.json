@@ -1,6 +1,6 @@
 {
   "name": "stumpfi",
-  "version": "5.0.1",
+  "version": "6.0.0",
   "description": "One file format to rule them all.",
   "repository": "https://github.com/matthieujabbour/stumpfi",
   "homepage": "https://github.com/matthieujabbour/stumpfi",
@@ -28,7 +28,7 @@
   },
   "types": "./types.d.ts",
   "devDependencies": {
-    "typescript-dev-kit": "^0.0.9"
+    "typescript-dev-kit": "^0.0.13"
   },
   "dependencies": {},
   "scripts": {

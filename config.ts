@@ -4,6 +4,9 @@
  */
 
 
+/* tslint:disable no-var-requires typedef */
+
+
 const path = require('path');
 
 
@@ -17,6 +20,6 @@ module.exports = {
     main: './main.ts',
   },
   srcPath: path.resolve(__dirname, 'src'),
-  distPath: path.resolve(__dirname, 'public'),
+  distPath: path.resolve(__dirname, 'dist'),
   banner: '/**\n * Copyright © 2016 - present, Matthieu Jabbour <matthieu.jabbour@gmail.com>.\n * All rights reserved.\n */',
 };
