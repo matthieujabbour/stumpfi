@@ -12,10 +12,6 @@ const path = require('path');
 
 module.exports = {
   target: 'node',
-  devServer: {
-    ip: 'localhost',
-    port: 3000,
-  },
   entry: {
     main: './main.ts',
   },

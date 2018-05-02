@@ -57,6 +57,6 @@ Want to give a hand ? Please read the [Contribution Guide](https://github.com/ma
 
 ## License
 
-[MIT](http://opensource.org/licenses/MIT)
+[MIT](https://github.com/matthieujabbour/stumpfi/blob/master/LICENSE)
 
 Copyright (c) 2017 - present, Matthieu Jabbour.

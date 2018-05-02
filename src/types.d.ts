@@ -40,6 +40,9 @@ declare abstract class Entity {
   /** Entity's id. */
   protected id : string;
 
+  /** Entity's last modification timestamp. */
+  protected timestamp : number;
+
 
   /**
    * Class constructor.
@@ -49,10 +52,32 @@ declare abstract class Entity {
 
 
   /**
+   * id setter.
+   * @param {string} id New id to set to the entity.
+   * @throws {Error} Throws an error if the id is not in a valid format.
+   * @returns {void}
+   */
+  public setId(id : string) : void;
+
+
+  /**
    * id getter.
    * @returns {string} The entity's id.
    */
   public getId() : string;
+
+  /**
+   * timestamp getter.
+   * @returns {number} The entity's last modification timestamp.
+   */
+  public getTimestamp() : number;
+
+
+  /**
+   * Updates the last modification timestamp.
+   * @returns {void}
+   */
+  protected updateTimestamp() : void;
 
 }
 
