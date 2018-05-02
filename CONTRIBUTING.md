@@ -154,7 +154,7 @@ To come.
 
 ## License
 
-[MIT](http://opensource.org/licenses/MIT)
+[MIT](https://github.com/matthieujabbour/stumpfi/blob/master/LICENSE)
 
 Copyright (c) 2017 - present, Matthieu Jabbour.
 

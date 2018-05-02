@@ -1,5 +1,5 @@
 /**
- * Copyright 2016 - present, Matthieu Jabbour <matthieu.jabbour@gmail.com>.
+ * Copyright 2017 - present, Matthieu Jabbour <matthieu.jabbour@gmail.com>.
  * All rights reserved.
  */
 
@@ -17,5 +17,5 @@ module.exports = {
   },
   srcPath: path.resolve(__dirname, 'src'),
   distPath: path.resolve(__dirname, 'dist'),
-  banner: '/*!\n * Copyright © 2016 - present, Matthieu Jabbour <matthieu.jabbour@gmail.com>.\n * All rights reserved.\n */',
+  banner: '/*!\n * Copyright © 2017 - present, Matthieu Jabbour <matthieu.jabbour@gmail.com>.\n * All rights reserved.\n */',
 };
