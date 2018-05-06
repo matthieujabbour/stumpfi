@@ -11,7 +11,7 @@ yarn add stumpfi
 
 ## Getting started
 
-You can learn the basics of stumpfi reading [this page](https://github.com/matthieujabbour/stumpfi/wiki/%5BWIP%5D-Concepts).
+You can learn the basics of stumpfi reading [this page](https://github.com/matthieujabbour/stumpfi/wiki/Concepts).
 
 
 ## API documentation
