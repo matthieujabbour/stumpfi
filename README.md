@@ -3,13 +3,15 @@
 One doc format to rule them all.
 
 
-## Usage
+## Installation
 
 ```bash
 yarn add stumpfi
 ```
 
 ## Getting started
+
+Check the [example](https://github.com/matthieujabbour/stumpfi/tree/master/example) to see how it works !
 
 You can learn the basics of stumpfi reading [this page](https://github.com/matthieujabbour/stumpfi/wiki/Concepts).
 
